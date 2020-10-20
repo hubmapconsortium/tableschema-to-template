@@ -4,6 +4,8 @@ import argparse
 import sys
 import os
 
+from yaml import safe_load
+
 
 class ShowUsageException(Exception):
     pass
@@ -39,7 +41,8 @@ _parser = _make_parser()
 
 def main():
     args = _parser.parse_args()
-    print(args.input_schema.read())
+    table_schema = safe_load(args.input_schema.read())
+    print(table_schema)
     return 0
 
 
