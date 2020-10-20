@@ -8,6 +8,8 @@ from pathlib import Path
 from yaml import safe_load
 from jsonschema import validate, ValidationError
 
+from create_xls import create_xls
+
 
 class ShowUsageException(Exception):
     pass
@@ -51,7 +53,7 @@ def main():
         validate(table_schema, table_schema_schema)
     except ValidationError as e:
         raise ShowUsageException(f'{args.input_schema.name} is not a valid Table Schema: {e.message}')
-    print(table_schema)
+    create_xls(table_schema, Path(args.output_dir) / 'template.xls')
     return 0
 
 
