@@ -1,40 +1,45 @@
 from datetime import date, time
+from string import ascii_uppercase
 
 from xlsxwriter import Workbook
 
 
-def create_xlsx(table_schema, xlsx_path):
-    # table_schema
+def _number_to_letters(n):
+    '''
+    >>> _number_to_letters(1)
+    'A'
+    >>> _number_to_letters(26)
+    'Z'
+    >>> _number_to_letters(27)
+    'AA'
+    >>> _number_to_letters(52)
+    'AZ'
 
+    '''
+    def n2a(n):
+        uc = ascii_uppercase
+        d, m = divmod(n, len(uc))
+        return n2a(d - 1) + uc[m] if d else uc[m]
+    return n2a(n)
+
+
+def create_xlsx(table_schema, xlsx_path):
     workbook = Workbook(xlsx_path)
     worksheet = workbook.add_worksheet()
 
-    # Add a format for the header cells.
     header_format = workbook.add_format({
         'bold': True,
         'text_wrap': True,
-        'valign': 'vcenter',
-        'indent': 1,
+        'align': 'center'
     })
 
-    # Set up layout of the worksheet.
-    worksheet.set_column('A:A', 68)
-    worksheet.set_column('B:B', 15)
-    worksheet.set_column('D:D', 15)
+    for i, field in enumerate(table_schema['fields']):
+        column = _number_to_letters(i)
+        worksheet.write(f'{column}1', field['name'], header_format)
+        field['name']
 
-    # Write the header cells and some data that will be used in the examples.
-    heading1 = 'Some examples of data validation in XlsxWriter'
-    heading2 = 'Enter values in this column'
-    heading3 = 'Sample Data'
-
-    worksheet.write('A1', heading1, header_format)
-    worksheet.write('B1', heading2, header_format)
-    worksheet.write('D1', heading3, header_format)
-
-    worksheet.write_row('D3', ['Integers', 1, 10])
-    worksheet.write_row('D4', ['List data', 'open', 'high', 'close'])
-    worksheet.write_row('D5', ['Formula', '=AND(F5=50,G5=60)', 50, 60])
-
+    workbook.close()
+    return
 
     # Example 1. Limiting input to an integer in a fixed range.
     #
