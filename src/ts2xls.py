@@ -3,8 +3,10 @@
 import argparse
 import sys
 import os
+from pathlib import Path
 
 from yaml import safe_load
+from jsonschema import validate, ValidationError
 
 
 class ShowUsageException(Exception):
@@ -42,6 +44,13 @@ _parser = _make_parser()
 def main():
     args = _parser.parse_args()
     table_schema = safe_load(args.input_schema.read())
+    table_schema_schema = safe_load(
+        (Path(__file__).parent / 'table-schema.json').read_text()
+    )
+    try:
+        validate(table_schema, table_schema_schema)
+    except ValidationError as e:
+        raise ShowUsageException(f'{args.input_schema.name} is not a valid Table Schema: {e.message}')
     print(table_schema)
     return 0
 
