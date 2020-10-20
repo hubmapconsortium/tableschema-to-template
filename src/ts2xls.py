@@ -19,7 +19,7 @@ def _dir_path(s):
 def _make_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--input_schema', type=argparse.FileType('w'),
+        '--input_schema', type=argparse.FileType('r'),
         required=True,
         metavar='INPUT',
         help='JSON or YAML Table Schema to read')
@@ -34,11 +34,12 @@ def _make_parser():
 # We want the error handling inside the __name__ == '__main__' section
 # to be able to show the usage string if it catches a ShowUsageException.
 # Defining this at the top level makes that possible.
-parser = _make_parser()
+_parser = _make_parser()
 
 
 def main():
-    args = parser.parse_args()
+    args = _parser.parse_args()
+    print(args.input_schema.read())
     return 0
 
 
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     try:
         exit_status = main()
     except ShowUsageException as e:
-        print(parser.format_usage(), file=sys.stderr)
+        print(_parser.format_usage(), file=sys.stderr)
         print(e, file=sys.stderr)
         exit_status = 2
     sys.exit(exit_status)

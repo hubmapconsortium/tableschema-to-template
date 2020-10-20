@@ -1,0 +1,5 @@
+
+fields:
+-
+  name: string_column
+  type: string
