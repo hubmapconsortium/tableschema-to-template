@@ -4,11 +4,31 @@ from string import ascii_uppercase
 from xlsxwriter import Workbook
 from xlsxwriter.utility import xl_col_to_name
 
+ROW_MAX = 1048576
+
+def col_below_header(i):
+    col_name = xl_col_to_name(i)
+    row_max = 1048576
+    return f'{col_name}2:{col_name}{row_max}'
+
+
 def get_validation(field):
-    return {
-        'validate': 'list',
-        'source': ['A', 'B', 'C']
-    }
+    if 'constraints' not in field:
+        return
+    if 'enum' in field['constraints']:
+        enum = field['constraints']['enum']
+        return {
+            'validate': 'list',
+            'source': enum,  # TODO: Not allowed to exceed 255 characters.
+            'error_message': f'Must be one of: {", ".join(enum)}'
+        }
+    if 'minimum' in field['constraints']:
+        minimum = field['constraints']['minimum']
+        return {
+            'validate': 'decimal',
+            'criteria': '>',
+            'minimum': minimum
+        }
 
 def create_xlsx(table_schema, xlsx_path):
     workbook = Workbook(xlsx_path)
@@ -24,9 +44,7 @@ def create_xlsx(table_schema, xlsx_path):
         worksheet.write(0, i, field['name'], header_format)
         worksheet.write_comment(0, i, field['description'])
         validation = get_validation(field)
-        col_name = xl_col_to_name(i)
-        whole_col = f'{col_name}2:{col_name}100'
-        worksheet.data_validation(whole_col, validation)
+        worksheet.data_validation(col_below_header(i), validation)
         
     workbook.close()
     return
