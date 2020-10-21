@@ -36,8 +36,8 @@ def create_xlsx(table_schema, xlsx_path):
     for i, field in enumerate(table_schema['fields']):
         column = _number_to_letters(i)
         worksheet.write(f'{column}1', field['name'], header_format)
-        field['name']
-
+        # worksheet.write_comment(f'{column}1', field['name'], header_format)
+        
     workbook.close()
     return
 
