@@ -2,26 +2,13 @@ from datetime import date, time
 from string import ascii_uppercase
 
 from xlsxwriter import Workbook
+from xlsxwriter.utility import xl_col_to_name
 
-
-def _number_to_letters(n):
-    '''
-    >>> _number_to_letters(1)
-    'A'
-    >>> _number_to_letters(26)
-    'Z'
-    >>> _number_to_letters(27)
-    'AA'
-    >>> _number_to_letters(52)
-    'AZ'
-
-    '''
-    def n2a(n):
-        uc = ascii_uppercase
-        d, m = divmod(n, len(uc))
-        return n2a(d - 1) + uc[m] if d else uc[m]
-    return n2a(n)
-
+def get_validation(field):
+    return {
+        'validate': 'list',
+        'source': ['A', 'B', 'C']
+    }
 
 def create_xlsx(table_schema, xlsx_path):
     workbook = Workbook(xlsx_path)
@@ -34,9 +21,12 @@ def create_xlsx(table_schema, xlsx_path):
     })
 
     for i, field in enumerate(table_schema['fields']):
-        column = _number_to_letters(i)
         worksheet.write(0, i, field['name'], header_format)
         worksheet.write_comment(0, i, field['description'])
+        validation = get_validation(field)
+        col_name = xl_col_to_name(i)
+        whole_col = f'{col_name}2:{col_name}100'
+        worksheet.data_validation(whole_col, validation)
         
     workbook.close()
     return
