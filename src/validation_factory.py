@@ -30,10 +30,10 @@ def _minimum_validation(field):
 
 
 def _pattern_validation(field):
-    pattern = field['constraints']['pattern']
+    # pattern = field['constraints']['pattern']
     return {
         'validate': 'custom',
-        'value': '=A1="TODO"' # TODO: Regex function goes here
+        'value': '=A1="TODO"'  # TODO: Regex function goes here
     }
 
 

@@ -52,7 +52,9 @@ def main():
     try:
         validate(table_schema, table_schema_schema)
     except ValidationError as e:
-        raise ShowUsageException(f'{args.input_schema.name} is not a valid Table Schema: {e.message}')
+        raise ShowUsageException(
+            f'{args.input_schema.name} is not a valid '
+            f'Table Schema: {e.message}')
     create_xlsx(table_schema, Path(args.output_dir) / 'template.xlsx')
     return 0
 
