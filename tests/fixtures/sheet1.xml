@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+	<dimension ref="A1:D1"/>
+	<sheetViews>
+		<sheetView tabSelected="1" workbookViewId="0"/>
+	</sheetViews>
+	<sheetFormatPr defaultRowHeight="15"/>
+	<sheetData>
+		<row r="1" spans="1:4">
+			<c r="A1" s="1" t="s">
+				<v>0</v>
+			</c>
+			<c r="B1" s="1" t="s">
+				<v>1</v>
+			</c>
+			<c r="C1" s="1" t="s">
+				<v>2</v>
+			</c>
+			<c r="D1" s="1" t="s">
+				<v>3</v>
+			</c>
+		</row>
+	</sheetData>
+	<dataValidations count="3">
+		<dataValidation type="decimal" operator="greaterThan" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
+			<formula1>0</formula1>
+		</dataValidation>
+		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" error="Must be one of: A, B, C" sqref="C2:C1048576">
+			<formula1>&quot;A,B,C&quot;</formula1>
+		</dataValidation>
+		<dataValidation type="custom" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="D2:D1048576">
+			<formula1>A1=&quot;TODO&quot;</formula1>
+		</dataValidation>
+	</dataValidations>
+	<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>
+	<legacyDrawing r:id="rId1"/>
+</worksheet>

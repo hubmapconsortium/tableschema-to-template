@@ -15,5 +15,5 @@ flake8 || die "Try: autopep8 --in-place --aggressive -r ."
 end flake8
 
 start pytest
-PYTHONPATH="${PYTHONPATH}:src" pytest
+PYTHONPATH="${PYTHONPATH}:src" pytest -vv
 end pytest
