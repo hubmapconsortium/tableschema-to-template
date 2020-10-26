@@ -1,43 +1,53 @@
 def get_validation(field):
     if 'constraints' not in field:
-        return _fallback_validation
+        return BaseValidation()
     if 'enum' in field['constraints']:
-        return _enum_validation
+        return EnumValidation()
     if 'minimum' in field['constraints']:
-        return _minimum_validation
+        return MinimumValidation()
     if 'pattern' in field['constraints']:
-        return _pattern_validation
+        return PatternValidation()
     # TODO: More, and make it type aware.
-    return _fallback_validation
+    return BaseValidation()
 
 
-def _enum_validation(field):
-    enum = field['constraints']['enum']
-    return {
-        'validate': 'list',
-        'source': enum,  # TODO: Not allowed to exceed 255 characters.
-        'error_message': f'Must be one of: {", ".join(enum)}'
-    }
+class BaseValidation():
+    def get_data_validation(self, field):
+        return {
+            'validate': 'any'
+        }
+    def write_enums_to_sheet(self, field, sheet):
+        '''
+        Enum values, if any, are writen to sheet,
+        and a range reference is returned.
+        Otherwise, return None.
+        '''
+        return None
 
 
-def _minimum_validation(field):
-    minimum = field['constraints']['minimum']
-    return {
-        'validate': 'decimal',
-        'criteria': '>',
-        'minimum': minimum
-    }
+class EnumValidation():
+    def get_data_validation(self, field):
+        enum = field['constraints']['enum']
+        return {
+            'validate': 'list',
+            'source': enum,  # TODO: Not allowed to exceed 255 characters.
+        }
 
 
-def _pattern_validation(field):
-    # pattern = field['constraints']['pattern']
-    return {
-        'validate': 'custom',
-        'value': '=A1="TODO"'  # TODO: Regex function goes here
-    }
+class MinimumValidation():
+    def get_data_validation(self, field):
+        minimum = field['constraints']['minimum']
+        return {
+            'validate': 'decimal',
+            'criteria': '>',
+            'minimum': minimum
+        }
 
 
-def _fallback_validation(field):
-    return {
-        'validate': 'any'
-    }
+class PatternValidation():
+    def get_data_validation(self, field):
+        # pattern = field['constraints']['pattern']
+        return {
+            'validate': 'custom',
+            'value': '=A1="TODO"'  # TODO: Regex function goes here
+        }

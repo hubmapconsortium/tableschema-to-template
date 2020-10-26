@@ -4,7 +4,7 @@ from xlsxwriter.utility import xl_col_to_name
 from validation_factory import get_validation
 
 
-def col_below_header(i):
+def _col_below_header(i):
     col_name = xl_col_to_name(i)
     row_max = 1048576
     return f'{col_name}2:{col_name}{row_max}'
@@ -12,7 +12,8 @@ def col_below_header(i):
 
 def create_xlsx(table_schema, xlsx_path):
     workbook = Workbook(xlsx_path)
-    worksheet = workbook.add_worksheet()
+    main_sheet = workbook.add_worksheet('Export this as TSV')
+    enum_sheet = workbook.add_worksheet('Value lists')
 
     header_format = workbook.add_format({
         'bold': True,
@@ -21,10 +22,11 @@ def create_xlsx(table_schema, xlsx_path):
     })
 
     for i, field in enumerate(table_schema['fields']):
-        worksheet.write(0, i, field['name'], header_format)
-        worksheet.write_comment(0, i, field['description'])
+        main_sheet.write(0, i, field['name'], header_format)
+        main_sheet.write_comment(0, i, field['description'])
         validation = get_validation(field)
-        field_validation = validation(field)
-        worksheet.data_validation(col_below_header(i), field_validation)
+        data_validation = validation.get_data_validation(field)
+        # enum_sheet: TODO
+        main_sheet.data_validation(_col_below_header(i), data_validation)
 
     workbook.close()
