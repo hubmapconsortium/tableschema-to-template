@@ -1,42 +1,44 @@
 def get_validation(field):
     if 'constraints' not in field:
-        return BaseValidation()
+        return BaseValidation(field)
     if 'enum' in field['constraints']:
-        return EnumValidation()
+        return EnumValidation(field)
     if 'minimum' in field['constraints']:
-        return MinimumValidation()
+        return MinimumValidation(field)
     if 'pattern' in field['constraints']:
-        return PatternValidation()
+        return PatternValidation(field)
     # TODO: More, and make it type aware.
-    return BaseValidation()
+    return BaseValidation(field)
 
 
 class BaseValidation():
-    def get_data_validation(self, field):
+    def __init__(self, field):
+        self.field = field
+    def get_data_validation(self):
         return {
             'validate': 'any'
         }
-    def write_enums_to_sheet(self, field, sheet):
+    def write_enums_to_sheet(self, sheet):
         '''
-        Enum values, if any, are writen to sheet,
-        and a range reference is returned.
-        Otherwise, return None.
+        Enum values for field, if any, are writen to sheet.
         '''
         return None
 
 
-class EnumValidation():
-    def get_data_validation(self, field):
-        enum = field['constraints']['enum']
+class EnumValidation(BaseValidation):
+    def get_data_validation(self):
+        enum = self.field['constraints']['enum']
         return {
             'validate': 'list',
             'source': enum,  # TODO: Not allowed to exceed 255 characters.
         }
+    def write_enums_to_sheet(self, sheet):
+        return None
 
 
-class MinimumValidation():
-    def get_data_validation(self, field):
-        minimum = field['constraints']['minimum']
+class MinimumValidation(BaseValidation):
+    def get_data_validation(self):
+        minimum = self.field['constraints']['minimum']
         return {
             'validate': 'decimal',
             'criteria': '>',
@@ -44,8 +46,8 @@ class MinimumValidation():
         }
 
 
-class PatternValidation():
-    def get_data_validation(self, field):
+class PatternValidation(BaseValidation):
+    def get_data_validation(self):
         # pattern = field['constraints']['pattern']
         return {
             'validate': 'custom',
