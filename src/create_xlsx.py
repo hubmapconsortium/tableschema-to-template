@@ -1,0 +1,30 @@
+from xlsxwriter import Workbook
+from xlsxwriter.utility import xl_col_to_name
+
+from validation_factory import get_validation
+
+
+def col_below_header(i):
+    col_name = xl_col_to_name(i)
+    row_max = 1048576
+    return f'{col_name}2:{col_name}{row_max}'
+
+
+def create_xlsx(table_schema, xlsx_path):
+    workbook = Workbook(xlsx_path)
+    worksheet = workbook.add_worksheet()
+
+    header_format = workbook.add_format({
+        'bold': True,
+        'text_wrap': True,
+        'align': 'center'
+    })
+
+    for i, field in enumerate(table_schema['fields']):
+        worksheet.write(0, i, field['name'], header_format)
+        worksheet.write_comment(0, i, field['description'])
+        validation = get_validation(field)
+        field_validation = validation(field)
+        worksheet.data_validation(col_below_header(i), field_validation)
+
+    workbook.close()

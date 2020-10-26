@@ -1,0 +1,25 @@
+
+fields:
+-
+  name: a_string
+  description: Any string
+  type: string
+-
+  name: positive
+  description: Positive number
+  type: number
+  constraints:
+    minimum: 0
+-
+  name: abc
+  description: '"A", "B", or "C"'
+  constraints:
+    enum:
+      - A
+      - B
+      - C
+-
+  name: only_vowels
+  description: Only vowels are allowed
+  constraints:
+    pattern: '[aeiouAEIOU]*'
