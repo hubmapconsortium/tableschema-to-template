@@ -9,3 +9,9 @@ Possibilities:
 - Add VBA to provide regex support in Excel.
 - Target Google Sheets, which provides a regex function out of the box.
 - Or target OpenOffice, where [regexes can be turned on in the settings](https://wiki.openoffice.org/wiki/Documentation/OOo3_User_Guides/Calc_Guide/Using_regular_expressions_in_functions).
+
+## Related work
+
+- [csv-gg](https://github.com/etalab/csv-gg): Hits an API to validate rows in a spreadsheet.
+- [table-schema-resource-template](https://pypi.org/project/table-schema-resource-template/): Just adds titles to the columns, based on the schema.
+- [data-curator](https://github.com/qcif/data-curator): Installable desktop application for data entry, base on schema. 
