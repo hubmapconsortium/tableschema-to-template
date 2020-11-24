@@ -24,9 +24,8 @@ def create_xlsx(table_schema, xlsx_path):
     for i, field in enumerate(table_schema['fields']):
         main_sheet.write(0, i, field['name'], header_format)
         main_sheet.write_comment(0, i, field['description'])
-        validation = get_validation(field)
+        validation = get_validation(field, enum_sheet)
         data_validation = validation.get_data_validation()
-        # enum_sheet: TODO
         main_sheet.data_validation(_col_below_header(i), data_validation)
 
     workbook.close()

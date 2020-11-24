@@ -15,26 +15,10 @@ flake8 || die "Try: autopep8 --in-place --aggressive -r ."
 end flake8
 
 start pytest
-PYTHONPATH="${PYTHONPATH}:src" pytest -vv
+PYTHONPATH="${PYTHONPATH}:src" pytest -vv --assert=plain
+# "plain" means that instead of a diff, we see the full, untruncated assertion message.
 end pytest
 
 start cli
-# Make tempdir and cleanup afterwards.
-OLD=`mktemp -d`
-NEW=`mktemp -d`
-
-src/ts2xl.py \
-  --input_schema tests/fixtures/schema.yaml \
-  --output_dir $NEW
-unzip -q $NEW/template.xlsx -d $NEW
-
-cp tests/fixtures/template.xlsx $OLD
-unzip -q $OLD/template.xlsx -d $OLD
-
-cmp -s $NEW/xl/worksheets/sheet1.xml \
-       $OLD/xl/worksheets/sheet1.xml \
-  || die "CLI ($NEW) output does not match fixture ($OLD)"
-echo 'Newly generated XSLX seems to match fixture'
-rm -rf $NEW
-rm -rf $OLD
+./test-cli.sh
 end cli

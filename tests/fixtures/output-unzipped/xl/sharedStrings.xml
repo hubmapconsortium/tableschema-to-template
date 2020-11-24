@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="4" uniqueCount="4">
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="7" uniqueCount="7">
 	<si>
 		<t>a_string</t>
 	</si>
@@ -8,6 +8,15 @@
 	</si>
 	<si>
 		<t>abc</t>
+	</si>
+	<si>
+		<t>A</t>
+	</si>
+	<si>
+		<t>B</t>
+	</si>
+	<si>
+		<t>C</t>
 	</si>
 	<si>
 		<t>only_vowels</t>
