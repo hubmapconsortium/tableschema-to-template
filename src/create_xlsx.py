@@ -13,7 +13,6 @@ def _col_below_header(i):
 def create_xlsx(table_schema, xlsx_path):
     workbook = Workbook(xlsx_path)
     main_sheet = workbook.add_worksheet('Export this as TSV')
-    enum_sheet = workbook.add_worksheet('Value lists')
 
     header_format = workbook.add_format({
         'bold': True,
@@ -24,7 +23,7 @@ def create_xlsx(table_schema, xlsx_path):
     for i, field in enumerate(table_schema['fields']):
         main_sheet.write(0, i, field['name'], header_format)
         main_sheet.write_comment(0, i, field['description'])
-        validation = get_validation(field, enum_sheet)
+        validation = get_validation(field, workbook)
         data_validation = validation.get_data_validation()
         main_sheet.data_validation(_col_below_header(i), data_validation)
 
