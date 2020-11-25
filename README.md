@@ -1,4 +1,5 @@
-# tableschema-to-excel-template
+# tableschema-to-template
+
 Given a [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/)
 (like [this](tests/fixtures/schema.yaml)),
 generate an Excel template with input validation

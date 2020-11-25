@@ -23,7 +23,7 @@ class BaseValidation():
 class EnumValidation(BaseValidation):
     def get_data_validation(self):
         enum = self.field['constraints']['enum']
-        name = self.field['name']
+        name = f"{self.field['name']} list"
         enum_sheet = self.workbook.add_worksheet(name)
         for i, value in enumerate(enum):
             enum_sheet.write(i, 0, value)
@@ -31,5 +31,6 @@ class EnumValidation(BaseValidation):
         enum = self.field['constraints']['enum']
         return {
             'validate': 'list',
-            'source': "$'" + name + "'.$A$1:$A$" + str(len(enum))
+            'source': f"$'{name}'!$A$1:$A${len(enum)}"
+            # NOTE: OpenOffice uses "." instead of "!".
         }
