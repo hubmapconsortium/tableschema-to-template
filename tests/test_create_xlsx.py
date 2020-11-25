@@ -36,8 +36,12 @@ def assert_matches_fixture(xlsx_path, zip_path):
         f'cp {pretty_xml_tmp_path} {pretty_xml_fixture_path}'
 
 
-def test_create_xlsx(xlsx_path):
+@pytest.mark.parametrize(
+    "zip_path",
+    ['xl/worksheets/sheet1.xml',
+     'xl/sharedStrings.xml',
+     'xl/comments1.xml']
+)
+def test_create_xlsx(xlsx_path, zip_path):
     # TODO: Scan the directory for fixtures, instead of listing here.
-    assert_matches_fixture(xlsx_path, 'xl/worksheets/sheet1.xml')
-    assert_matches_fixture(xlsx_path, 'xl/sharedStrings.xml')
-    assert_matches_fixture(xlsx_path, 'xl/comments1.xml')
+    assert_matches_fixture(xlsx_path, zip_path)
