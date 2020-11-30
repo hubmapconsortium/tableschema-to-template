@@ -17,10 +17,10 @@
 	</sheetData>
 	<dataValidations count="2">
 		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="A2:A1048576">
-			<formula1>$'Value lists'.$A$1:$A$3</formula1>
+			<formula1>&quot;A,B,C&quot;</formula1>
 		</dataValidation>
 		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
-			<formula1>$'Value lists'.$A$1:$A$3</formula1>
+			<formula1>&quot;X,Y,Z&quot;</formula1>
 		</dataValidation>
 	</dataValidations>
 	<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>

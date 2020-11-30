@@ -27,7 +27,7 @@ def assert_matches_fixture(xlsx_path, zip_path):
         Path(__file__).parent / 'fixtures/output-unzipped' / zip_path
     )
 
-    pretty_xml_tmp_path = Path('/tmp/from-excel-fixture.xml')
+    pretty_xml_tmp_path = Path('/tmp') / Path(zip_path).name
     pretty_xml_tmp_path.write_text(pretty_xml)
 
     assert pretty_xml.strip() == \
