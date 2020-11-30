@@ -8,7 +8,8 @@ setuptools.setup(
     version="0.0.1",
     author="Chuck McCallum",
     author_email="mccallucc+tableschema@gmail.com",
-    description="Given a Frictionless Table Schema, generates an Excel template with input validation",
+    description="Given a Frictionless Table Schema, "
+    "generates an Excel template with input validation",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hubmapconsortium/tableschema-to-template",
