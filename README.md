@@ -9,19 +9,30 @@ generate an Excel template with input validation
 
 ## Usage
 
-From a checkout of the repo, run a demo:
-```
-pip install -r requirements.txt
-tableschema_to_template/ts2xl.py \
-  --input_schema tests/fixtures/schema.yaml \
+```sh
+pip install tableschema-to-template
+wget https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml
+ts2xl.py \
+  --input_schema schema.yaml \
   --output_dir /tmp
+# Open with Excel:
 open /tmp/template.xlsx
 ```
 
 ## Development
 
-Run the tests:
+From a checkout of the repo, run a demo:
+```sh
+pip install -r requirements.txt
+tableschema_to_template/ts2xl.py \
+  --input_schema tests/fixtures/schema.yaml \
+  --output_dir /tmp
+# Open with Excel:
+open /tmp/template.xlsx
 ```
+
+Run the tests:
+```sh
 pip install -r requirements-dev.txt
 ./test.sh
 ```
@@ -33,7 +44,6 @@ To build and publish,
 
 ## Next steps
 
-- Package and push to pypi.
 - How, and whether, to validate regex patterns. Possibilities:
   - Don't even try!
   - Add VBA to provide regex support in Excel.
