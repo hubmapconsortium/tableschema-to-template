@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.1",
+    version="0.0.2",
     install_requires=[
         # TODO: Not strict enough.
         'jsonschema',
@@ -29,5 +29,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     # TODO: May be too strict.
-    python_requires='>=3.8',
+    python_requires='>=3.7',
 )
