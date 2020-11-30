@@ -6,6 +6,13 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="tableschema-to-template",
     version="0.0.1",
+    install_requires=[
+        # TODO: Version numbers based on major version:
+        # May be too strict, or not strict enough.
+        'jsonschema>=3.0.0',
+        'pyyaml>=5.0.0',
+        'xlsxwriter>=1.0.0'
+    ],
     author="Chuck McCallum",
     author_email="mccallucc+tableschema@gmail.com",
     description="Given a Frictionless Table Schema, "
@@ -19,5 +26,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    # TODO: May be too strict.
     python_requires='>=3.8',
 )
