@@ -1,6 +1,11 @@
 # Excel backups:
 ~*
 
+# Packaging:
+build/
+dist/
+tableschema_to_template.egg-info/
+
 **/__pycache__
 .vscode/
 **/.DS_Store
