@@ -9,16 +9,27 @@ generate an Excel template with input validation
 
 ## Usage
 
+Run a demo:
 ```
-# Run a demo:
 pip install -r requirements.txt
-tableschema_to_template/ts2xl.py --input_schema tests/fixtures/schema.yaml \
-             --output_dir /tmp
+tableschema_to_template/ts2xl.py \
+  --input_schema tests/fixtures/schema.yaml \
+  --output_dir /tmp
 open /tmp/template.xlsx
+```
 
-# Run the tests:
+## Development
+
+Run the tests:
+```
 pip install -r requirements-dev.txt
 ./test.sh
+```
+
+Build and publish:
+```
+python3 setup.py sdist bdist_wheel
+python3 -m twine upload --repository testpypi dist/*
 ```
 
 ## Next steps
