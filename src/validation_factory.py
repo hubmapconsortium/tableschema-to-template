@@ -1,43 +1,37 @@
-def get_validation(field):
+def get_validation(field, workbook):
     if 'constraints' not in field:
-        return _fallback_validation
+        return BaseValidation(field, workbook)
     if 'enum' in field['constraints']:
-        return _enum_validation
-    if 'minimum' in field['constraints']:
-        return _minimum_validation
-    if 'pattern' in field['constraints']:
-        return _pattern_validation
-    # TODO: More, and make it type aware.
-    return _fallback_validation
+        return EnumValidation(field, workbook)
+    # TODO:
+    # if 'pattern' in field['constraints']:
+    #     return PatternValidation(field, enum_sheet)
+    return BaseValidation(field)
 
 
-def _enum_validation(field):
-    enum = field['constraints']['enum']
-    return {
-        'validate': 'list',
-        'source': enum,  # TODO: Not allowed to exceed 255 characters.
-        'error_message': f'Must be one of: {", ".join(enum)}'
-    }
+class BaseValidation():
+    def __init__(self, field, workbook):
+        self.field = field
+        self.workbook = workbook
+
+    def get_data_validation(self):
+        return {
+            'validate': 'any'
+        }
 
 
-def _minimum_validation(field):
-    minimum = field['constraints']['minimum']
-    return {
-        'validate': 'decimal',
-        'criteria': '>',
-        'minimum': minimum
-    }
+class EnumValidation(BaseValidation):
+    def get_data_validation(self):
+        enum = self.field['constraints']['enum']
+        name = f"{self.field['name']} list"
+        enum_sheet = self.workbook.add_worksheet(name)
+        for i, value in enumerate(enum):
+            enum_sheet.write(i, 0, value)
 
-
-def _pattern_validation(field):
-    # pattern = field['constraints']['pattern']
-    return {
-        'validate': 'custom',
-        'value': '=A1="TODO"'  # TODO: Regex function goes here
-    }
-
-
-def _fallback_validation(field):
-    return {
-        'validate': 'any'
-    }
+        enum = self.field['constraints']['enum']
+        return {
+            'validate': 'list',
+            'source': enum  # TODO: Replace with reference -->
+            # 'source': f"=$'{name}'!$A$1:$A${len(enum)}"
+            # NOTE: OpenOffice uses "." instead of "!".
+        }

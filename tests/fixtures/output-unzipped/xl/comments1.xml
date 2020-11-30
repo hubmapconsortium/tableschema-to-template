@@ -13,7 +13,7 @@
 						<rFont val="Tahoma"/>
 						<family val="2"/>
 					</rPr>
-					<t>Any string</t>
+					<t>Start of the alphabet</t>
 				</r>
 			</text>
 		</comment>
@@ -26,33 +26,7 @@
 						<rFont val="Tahoma"/>
 						<family val="2"/>
 					</rPr>
-					<t>Positive number</t>
-				</r>
-			</text>
-		</comment>
-		<comment ref="C1" authorId="0">
-			<text>
-				<r>
-					<rPr>
-						<sz val="8"/>
-						<color indexed="81"/>
-						<rFont val="Tahoma"/>
-						<family val="2"/>
-					</rPr>
-					<t>&quot;A&quot;, &quot;B&quot;, or &quot;C&quot;</t>
-				</r>
-			</text>
-		</comment>
-		<comment ref="D1" authorId="0">
-			<text>
-				<r>
-					<rPr>
-						<sz val="8"/>
-						<color indexed="81"/>
-						<rFont val="Tahoma"/>
-						<family val="2"/>
-					</rPr>
-					<t>Only vowels are allowed</t>
+					<t>End of the alphabet</t>
 				</r>
 			</text>
 		</comment>

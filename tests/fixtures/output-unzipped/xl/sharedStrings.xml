@@ -1,15 +1,27 @@
 <?xml version="1.0" ?>
-<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="4" uniqueCount="4">
-	<si>
-		<t>a_string</t>
-	</si>
-	<si>
-		<t>positive</t>
-	</si>
+<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="8" uniqueCount="8">
 	<si>
 		<t>abc</t>
 	</si>
 	<si>
-		<t>only_vowels</t>
+		<t>A</t>
+	</si>
+	<si>
+		<t>B</t>
+	</si>
+	<si>
+		<t>C</t>
+	</si>
+	<si>
+		<t>xyz</t>
+	</si>
+	<si>
+		<t>X</t>
+	</si>
+	<si>
+		<t>Y</t>
+	</si>
+	<si>
+		<t>Z</t>
 	</si>
 </sst>
