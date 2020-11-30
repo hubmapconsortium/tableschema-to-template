@@ -1,9 +1,9 @@
 # tableschema-to-template
 
 Given a [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/)
-(like [this](tests/fixtures/schema.yaml)),
+(like [this](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml)),
 generate an Excel template with input validation
-(like [this](tests/fixtures/template.xlsx)).
+(like [this](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/template.xlsx)).
 
 **This is a proof of concept.**
 
