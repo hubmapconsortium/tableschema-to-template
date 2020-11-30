@@ -5,13 +5,15 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.3",
+    version="0.0.1",
     install_requires=[
-        # TODO: Version numbers based on major version:
-        # May be too strict, or not strict enough.
-        'jsonschema>=3.0.0',
-        'pyyaml>=5.0.0',
-        'xlsxwriter>=1.0.0'
+        # TODO: Not strict enough.
+        'jsonschema',
+        'pyyaml',
+        'xlsxwriter'
+    ],
+    scripts=[
+        'tableschema_to_template/ts2xl.py'
     ],
     author="Chuck McCallum",
     author_email="mccallucc+tableschema@gmail.com",

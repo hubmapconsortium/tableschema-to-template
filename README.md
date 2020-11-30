@@ -9,7 +9,7 @@ generate an Excel template with input validation
 
 ## Usage
 
-Run a demo:
+From a checkout of the repo, run a demo:
 ```
 pip install -r requirements.txt
 tableschema_to_template/ts2xl.py \
