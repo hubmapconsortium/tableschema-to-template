@@ -26,12 +26,10 @@ pip install -r requirements-dev.txt
 ./test.sh
 ```
 
-Build and publish:
-```
-rm -rf dist/
-python3 setup.py sdist bdist_wheel
-python3 -m twine upload --repository testpypi dist/*
-```
+To build and publish,
+- If you haven't already, generate a token on Pypi and create a `.pypirc` in your checkout.
+- Increment the version number in setup.py.
+- Finally: `./publish.sh`
 
 ## Next steps
 
