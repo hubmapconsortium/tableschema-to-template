@@ -8,7 +8,7 @@ from pathlib import Path
 from yaml import safe_load
 from jsonschema import validate, ValidationError
 
-from create_xlsx import create_xlsx
+from tableschema_to_template.create_xlsx import create_xlsx
 
 
 class ShowUsageException(Exception):

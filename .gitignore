@@ -1,6 +1,9 @@
 # Excel backups:
 ~*
 
+# pypi token:
+.pypirc
+
 # Packaging:
 build/
 dist/
