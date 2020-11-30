@@ -40,4 +40,3 @@ From the Frictionless community:
 For the biomedical ontologies community:
 - [`CEDAR`](https://more.metadatacenter.org/): Data entry tool based on ontologies.
 - [`Webulous`](https://www.ebi.ac.uk/spot/webulous/): Google sheets plugin that adds pulldowns based on ontology terms.
-
