@@ -31,7 +31,6 @@ class EnumValidation(BaseValidation):
         enum = self.field['constraints']['enum']
         return {
             'validate': 'list',
-            'source': enum  # TODO: Replace with reference -->
-            # 'source': f"=$'{name}'!$A$1:$A${len(enum)}"
+            'source': f"='{name}'!$A$1:$A${len(enum)}"
             # NOTE: OpenOffice uses "." instead of "!".
         }
