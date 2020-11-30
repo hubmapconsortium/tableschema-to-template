@@ -12,7 +12,7 @@ generate an Excel template with input validation
 ```
 # Run a demo:
 pip install -r requirements.txt
-src/ts2xl.py --input_schema tests/fixtures/schema.yaml \
+tableschema_to_template/ts2xl.py --input_schema tests/fixtures/schema.yaml \
              --output_dir /tmp
 open /tmp/template.xlsx
 

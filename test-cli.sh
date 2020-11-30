@@ -12,7 +12,7 @@ die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
 OLD=`mktemp -d`
 NEW=`mktemp -d`
 
-src/ts2xl.py \
+tableschema_to_template/ts2xl.py \
   --input_schema tests/fixtures/schema.yaml \
   --output_dir $NEW
 unzip -q $NEW/template.xlsx -d $NEW
