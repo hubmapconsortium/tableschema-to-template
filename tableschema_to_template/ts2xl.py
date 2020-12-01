@@ -3,7 +3,6 @@
 import argparse
 import sys
 import os
-from pathlib import Path
 
 from yaml import safe_load
 from jsonschema import ValidationError
