@@ -24,7 +24,8 @@ open /tmp/template.xlsx
 From a checkout of the repo, run a demo:
 ```sh
 pip install -r requirements.txt
-tableschema_to_template/ts2xl.py \
+PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
+  tableschema_to_template/ts2xl.py \
   --input_schema tests/fixtures/schema.yaml \
   --output_dir /tmp
 # Open with Excel:

@@ -1,12 +1,9 @@
 def get_validation(field, workbook):
-    if 'constraints' not in field:
-        return BaseValidation(field, workbook)
-    if 'enum' in field['constraints']:
+    if 'constraints' in field and 'enum' in field['constraints']:
         return EnumValidation(field, workbook)
-    # TODO:
-    # if 'pattern' in field['constraints']:
-    #     return PatternValidation(field, enum_sheet)
-    return BaseValidation(field)
+    if 'type' in field and field['type'] == 'boolean':
+        return BooleanValidation(field, workbook)
+    return BaseValidation(field, workbook)
 
 
 class BaseValidation():
@@ -33,4 +30,12 @@ class EnumValidation(BaseValidation):
             'validate': 'list',
             'source': f"='{name}'!$A$1:$A${len(enum)}"
             # NOTE: OpenOffice uses "." instead of "!".
+        }
+
+
+class BooleanValidation(BaseValidation):
+    def get_data_validation(self):
+        return {
+            'validate': 'list',
+            'source': ['TRUE', 'FALSE']
         }
