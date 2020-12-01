@@ -30,5 +30,57 @@
 				</r>
 			</text>
 		</comment>
+		<comment ref="C1" authorId="0">
+			<text>
+				<r>
+					<rPr>
+						<sz val="8"/>
+						<color indexed="81"/>
+						<rFont val="Tahoma"/>
+						<family val="2"/>
+					</rPr>
+					<t>Any string</t>
+				</r>
+			</text>
+		</comment>
+		<comment ref="D1" authorId="0">
+			<text>
+				<r>
+					<rPr>
+						<sz val="8"/>
+						<color indexed="81"/>
+						<rFont val="Tahoma"/>
+						<family val="2"/>
+					</rPr>
+					<t>Any number</t>
+				</r>
+			</text>
+		</comment>
+		<comment ref="E1" authorId="0">
+			<text>
+				<r>
+					<rPr>
+						<sz val="8"/>
+						<color indexed="81"/>
+						<rFont val="Tahoma"/>
+						<family val="2"/>
+					</rPr>
+					<t>Any integer</t>
+				</r>
+			</text>
+		</comment>
+		<comment ref="F1" authorId="0">
+			<text>
+				<r>
+					<rPr>
+						<sz val="8"/>
+						<color indexed="81"/>
+						<rFont val="Tahoma"/>
+						<family val="2"/>
+					</rPr>
+					<t>Any boolean</t>
+				</r>
+			</text>
+		</comment>
 	</commentList>
 </comments>
