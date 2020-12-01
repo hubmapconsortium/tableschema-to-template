@@ -24,7 +24,9 @@ class BaseValidation():
 class EnumValidation(BaseValidation):
     def get_data_validation(self):
         enum = self.field['constraints']['enum']
-        name = f"{self.field['name']} list"
+        name = f"{self.field['name']} list"[:31]
+        # TODO: Warn if sheet names collide.
+        # https://github.com/hubmapconsortium/tableschema-to-template/issues/9
         enum_sheet = self.workbook.add_worksheet(name)
         for i, value in enumerate(enum):
             enum_sheet.write(i, 0, value)
