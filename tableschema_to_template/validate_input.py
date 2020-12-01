@@ -1,5 +1,16 @@
+from yaml import safe_load
+from jsonschema import validate
+
+
+def validate_input(table_schema):
+    table_schema_schema = safe_load(_table_schema_schema)
+    validate(table_schema, table_schema_schema)
+
+
+# This is ugly, but it's less configuration than including JSON in the build.
+# From: https://specs.frictionlessdata.io/schemas/table-schema.json
+_table_schema_schema = r'''
 {
-  "$comment": "Downloaded from https://specs.frictionlessdata.io/schemas/table-schema.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Table Schema",
   "description": "A Table Schema for this resource, compliant with the [Table Schema](/tableschema/) specification.",
@@ -1544,3 +1555,4 @@
     "{\n  \"schema\": {\n    \"fields\": [\n      {\n        \"name\": \"first_name\",\n        \"type\": \"string\"\n        \"constraints\": {\n          \"required\": true\n        }\n      },\n      {\n        \"name\": \"age\",\n        \"type\": \"integer\"\n      },\n    ],\n    \"primaryKey\": [\n      \"name\"\n    ]\n  }\n}\n"
   ]
 }
+'''

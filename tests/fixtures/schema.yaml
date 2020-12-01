@@ -16,3 +16,18 @@ fields:
       - X
       - Y
       - Z
+-
+  name: string
+  description: Any string
+-
+  name: number
+  description: Any number
+  type: number
+-
+  name: integer
+  description: Any integer
+  type: integer
+-
+  name: boolean
+  description: Any boolean
+  type: boolean

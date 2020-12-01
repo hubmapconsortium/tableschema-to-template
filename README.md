@@ -1,29 +1,50 @@
 # tableschema-to-template
 
 Given a [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/)
-(like [this](tests/fixtures/schema.yaml)),
+(like [this](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml)),
 generate an Excel template with input validation
-(like [this](tests/fixtures/template.xlsx)).
+(like [this](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/template.xlsx)).
 
 **This is a proof of concept.**
 
 ## Usage
 
-```
-# Run a demo:
-pip install -r requirements.txt
-src/ts2xl.py --input_schema tests/fixtures/schema.yaml \
-             --output_dir /tmp
+```sh
+pip install tableschema-to-template
+wget https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml
+ts2xl.py \
+  --input_schema schema.yaml \
+  --output_dir /tmp
+# Open with Excel:
 open /tmp/template.xlsx
+```
 
-# Run the tests:
+## Development
+
+From a checkout of the repo, run a demo:
+```sh
+pip install -r requirements.txt
+PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
+  tableschema_to_template/ts2xl.py \
+  --input_schema tests/fixtures/schema.yaml \
+  --output_dir /tmp
+# Open with Excel:
+open /tmp/template.xlsx
+```
+
+Run the tests:
+```sh
 pip install -r requirements-dev.txt
 ./test.sh
 ```
 
+To build and publish,
+- If you haven't already, generate a token on Pypi and create a `.pypirc` in your checkout.
+- Increment the version number in setup.py.
+- Finally: `./publish.sh`
+
 ## Next steps
 
-- Package and push to pypi.
 - How, and whether, to validate regex patterns. Possibilities:
   - Don't even try!
   - Add VBA to provide regex support in Excel.
