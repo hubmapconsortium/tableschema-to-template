@@ -5,9 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.5",
+    version="0.0.7",
     install_requires=[
         # TODO: Not strict enough.
+        # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
         'jsonschema',
         'pyyaml',
         'xlsxwriter'
@@ -29,5 +30,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     # TODO: May be too strict.
+    # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
     python_requires='>=3.7',
 )
