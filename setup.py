@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.6",
+    version="0.0.7",
     install_requires=[
         # TODO: Not strict enough.
         # https://github.com/hubmapconsortium/tableschema-to-template/issues/7

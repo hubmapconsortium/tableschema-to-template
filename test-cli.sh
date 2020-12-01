@@ -30,7 +30,7 @@ for UNZIPPED_PATH in 'xl/worksheets/sheet1.xml'; do
   cmp -s $NEW_DIR/$UNZIPPED_PATH \
         $OLD_DIR/$UNZIPPED_PATH \
     || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR).
-Consider: cp $NEW_XSLX ./tests/fixtures/"
+Consider: cp $NEW_XLSX ./tests/fixtures/"
 done
 echo 'Newly generated XSLX seems to match fixture'
 rm -rf $NEW_DIR
