@@ -20,5 +20,5 @@ PYTHONPATH="${PYTHONPATH}:tableschema_to_template" pytest -vv --assert=plain
 end pytest
 
 start cli
-./test-cli.sh
+./test-cli.sh || die 'test-cli.sh failed'
 end cli

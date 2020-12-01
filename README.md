@@ -12,9 +12,7 @@ generate an Excel template with input validation
 ```sh
 pip install tableschema-to-template
 wget https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml
-ts2xl.py \
-  --input_schema schema.yaml \
-  --output_dir /tmp
+ts2xl.py schema.yaml /tmp/template.xlsx
 # Open with Excel:
 open /tmp/template.xlsx
 ```
@@ -26,8 +24,7 @@ From a checkout of the repo, run a demo:
 pip install -r requirements.txt
 PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
   tableschema_to_template/ts2xl.py \
-  --input_schema tests/fixtures/schema.yaml \
-  --output_dir /tmp
+  tests/fixtures/schema.yaml /tmp/template.xlsx
 # Open with Excel:
 open /tmp/template.xlsx
 ```
