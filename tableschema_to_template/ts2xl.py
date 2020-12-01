@@ -16,25 +16,24 @@ class ShowUsageException(Exception):
     pass
 
 
-def _dir_path(s):
-    if os.path.isdir(s):
-        return s
-    else:
-        raise ShowUsageException(f'"{s}" is not a directory')
+def _xslx_path(s):
+    if os.path.exists(s):
+        raise ShowUsageException(f'"{s}" already exists')
+    if s.endswith('.xslx'):
+        raise ShowUsageException(f'"{s}" does not end with ".xslx"')
+    return s
 
 
 def _make_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--input_schema', type=argparse.FileType('r'),
-        required=True,
-        metavar='INPUT',
+        'input_schema', type=argparse.FileType('r'),
+        metavar='SCHEMA',
         help='JSON or YAML Table Schema to read')
     parser.add_argument(
-        '--output_dir', type=_dir_path,
-        required=True,
-        metavar='OUTPUT',
-        help='Directory to write template files to')
+        'output_xslx', type=_xslx_path,
+        metavar='EXCEL',
+        help='Excel (.xslx) file to create')
     return parser
 
 
@@ -53,7 +52,7 @@ def main():
         raise ShowUsageException(
             f'{args.input_schema.name} is not a valid '
             f'Table Schema: {e.message}')
-    create_xlsx(table_schema, Path(args.output_dir) / 'template.xlsx')
+    create_xlsx(table_schema, args.output_xslx)
     return 0
 
 
