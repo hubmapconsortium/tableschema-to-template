@@ -10,9 +10,9 @@ def _col_below_header(i):
     return f'{col_name}2:{col_name}{row_max}'
 
 
-def create_xlsx(table_schema, xlsx_path):
+def create_xlsx(table_schema, xlsx_path, sheet_name='Export this as TSV'):
     workbook = Workbook(xlsx_path)
-    main_sheet = workbook.add_worksheet('Export this as TSV')
+    main_sheet = workbook.add_worksheet(sheet_name)
 
     header_format = workbook.add_format({
         'bold': True,

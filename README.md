@@ -5,48 +5,35 @@ Given a [Frictionless Table Schema](https://specs.frictionlessdata.io/table-sche
 generate an Excel template with input validation
 (like [this](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/template.xlsx)).
 
-**This is a proof of concept.**
-
 ## Usage
+
+Download a [sample `schema.yaml`](https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml), and then:
 
 ```sh
 pip install tableschema-to-template
-wget https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/tests/fixtures/schema.yaml
-ts2xl.py schema.yaml /tmp/template.xlsx
+ts2xl.py schema.yaml template.xlsx
 # Open with Excel:
-open /tmp/template.xlsx
+open template.xlsx
 ```
 
-## Development
-
-From a checkout of the repo, run a demo:
-```sh
-pip install -r requirements.txt
-PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
-  tableschema_to_template/ts2xl.py \
-  tests/fixtures/schema.yaml /tmp/template.xlsx
-# Open with Excel:
-open /tmp/template.xlsx
+Or to use inside Python:
+```python
+from tableschema_to_template.create_xlsx import create_xlsx
+schema = {'fields': [{
+  'name': 'a_number',
+  'description': 'A number!',
+  'type': 'number'
+}]}
+create_xlsx(schema, '/tmp/template.xlsx')
 ```
 
-Run the tests:
-```sh
-pip install -r requirements-dev.txt
-./test.sh
-```
+[Instructions for project developers here.](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
 
-To build and publish,
-- If you haven't already, generate a token on Pypi and create a `.pypirc` in your checkout.
-- Increment the version number in setup.py.
-- Finally: `./publish.sh`
+## Features
 
-## Next steps
-
-- How, and whether, to validate regex patterns. Possibilities:
-  - Don't even try!
-  - Add VBA to provide regex support in Excel.
-  - Target Google Sheets, which provides a regex function out of the box.
-  - Or target OpenOffice, where [regexes can be turned on in the settings](https://wiki.openoffice.org/wiki/Documentation/OOo3_User_Guides/Calc_Guide/Using_regular_expressions_in_functions).
+- Enum constraints transformed into pull-downs.
+- Field descriptions transformed into comments in header.
+- Float, integer, and boolean type validation.
 
 ## Related work
 
