@@ -32,6 +32,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     # Keep in sync with .travis.yml:
-    python_requires='>=3.5',
+    python_requires='>=3.6',
+    # f-strings aren't available in 3.5.
     # pyyaml install fails on 3.4.
 )

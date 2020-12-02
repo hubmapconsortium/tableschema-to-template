@@ -1,8 +1,8 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from zipfile import ZipFile
-import xml.dom.minidom
 
+from yattag import indent
 import pytest
 from yaml import safe_load
 
@@ -24,9 +24,11 @@ def assert_matches_fixture(xlsx_path, zip_path):
     # xml_string = zipfile.Path(xlsx_path, zip_path).read_text()
     with ZipFile(xlsx_path) as zip_handle:
         with zip_handle.open(zip_path) as file_handle:
-            xml_string = file_handle.read()
-    dom = xml.dom.minidom.parseString(xml_string)
-    pretty_xml = dom.toprettyxml()
+            xml_string = file_handle.read().decode('utf-8')
+
+    # Before Python3.8, attribute order is not stable in minidom,
+    # so we need to use an outside library.
+    pretty_xml = indent(xml_string)
     pretty_xml_fixture_path = (
         Path(__file__).parent / 'fixtures/output-unzipped' / zip_path
     )
