@@ -10,6 +10,9 @@ setuptools.setup(
         'jsonschema>=1.0.0',
         'pyyaml>=3.13',
         'xlsxwriter>=1.2.8'
+        # xlsxwriter bound could be loosened:
+        # Earlier versions generate slightly different XML, and tests fail here,
+        # but that's only because they are too fussy.
     ],
     scripts=[
         'tableschema_to_template/ts2xl.py'
