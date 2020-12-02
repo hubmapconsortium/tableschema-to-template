@@ -1,6 +1,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
-import zipfile
+from zipfile import ZipFile
 import xml.dom.minidom
 
 import pytest
@@ -20,8 +20,12 @@ def xlsx_path():
 
 
 def assert_matches_fixture(xlsx_path, zip_path):
-    xml_path = zipfile.Path(xlsx_path, zip_path)
-    dom = xml.dom.minidom.parseString(xml_path.read_text())
+    # zipfile.Path is introduced in Python3.8, and could make this cleaner:
+    # xml_string = zipfile.Path(xlsx_path, zip_path).read_text()
+    with ZipFile(xlsx_path) as zip_handle:
+        with zip_handle.open(zip_path) as file_handle:
+            xml_string = file_handle.read()
+    dom = xml.dom.minidom.parseString(xml_string)
     pretty_xml = dom.toprettyxml()
     pretty_xml_fixture_path = (
         Path(__file__).parent / 'fixtures/output-unzipped' / zip_path

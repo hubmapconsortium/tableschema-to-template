@@ -17,6 +17,7 @@ pip install -r requirements-dev.txt
 ```
 
 To build and publish,
+- `pip install twine`; This library requires on Python3.6 or above. To maximize the coverage of the build matrix, `twine` is not included in `requirements-dev.txt`.
 - If you haven't already, generate a token on Pypi and create a `.pypirc` in your checkout.
 - Increment the version number in setup.py.
 - Finally: `./publish.sh`
