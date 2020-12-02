@@ -15,24 +15,36 @@ class ShowUsageException(Exception):
     pass
 
 
-def _xslx_path(s):
+def _xlsx_path(s):
     if os.path.exists(s):
         raise ShowUsageException(f'"{s}" already exists')
-    if s.endswith('.xslx'):
-        raise ShowUsageException(f'"{s}" does not end with ".xslx"')
+    if not s.endswith('.xlsx'):
+        raise ShowUsageException(f'"{s}" does not end with ".xlsx"')
     return s
 
 
 def _make_parser():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description='''
+Given a Frictionless Table Schema,
+generates an Excel template with input validation.
+''',
+        epilog='''
+Optional CLI arguments correspond to optional kwarg arguements in Python.
+'''
+    )
     parser.add_argument(
         'input_schema', type=argparse.FileType('r'),
         metavar='SCHEMA',
         help='JSON or YAML Table Schema to read')
     parser.add_argument(
-        'output_xslx', type=_xslx_path,
+        'output_xlsx', type=_xlsx_path,
         metavar='EXCEL',
-        help='Excel (.xslx) file to create')
+        help='Excel (.xlsx) file to create')
+    parser.add_argument(
+        '--sheet_name',
+        metavar='NAME',
+        help='Name for the first sheet')
     return parser
 
 
@@ -43,15 +55,18 @@ _parser = _make_parser()
 
 
 def main():
-    args = _parser.parse_args()
-    table_schema = safe_load(args.input_schema.read())
+    args = vars(_parser.parse_args())
+
+    input_schema = args.pop('input_schema')
+    table_schema = safe_load(input_schema.read())
     try:
         validate_input(table_schema)
     except ValidationError as e:
         raise ShowUsageException(
-            f'{args.input_schema.name} is not a valid '
+            f'{input_schema.name} is not a valid '
             f'Table Schema: {e.message}')
-    create_xlsx(table_schema, args.output_xslx)
+
+    create_xlsx(table_schema, args.pop('output_xlsx'), **args)
     return 0
 
 
