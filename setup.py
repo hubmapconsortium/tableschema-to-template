@@ -7,6 +7,7 @@ setuptools.setup(
     name="tableschema-to-template",
     version="0.0.7",
     install_requires=[
+        # Keep this in sync with requirements-lower-bound.txt
         'jsonschema>=1.0.0',
         'pyyaml>=3.13',
         'xlsxwriter>=1.2.8'
