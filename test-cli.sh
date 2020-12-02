@@ -8,7 +8,7 @@ reset=`tput sgr0`
 
 die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
 
-function test_good_figure() {
+function test_good_fixture() {
   # Make tempdir and cleanup afterwards.
   OLD_DIR=`mktemp -d`
   NEW_DIR=`mktemp -d`
@@ -38,4 +38,4 @@ function test_good_figure() {
   rm -rf $OLD_DIR
 }
 
-test_good_figure
+test_good_fixture

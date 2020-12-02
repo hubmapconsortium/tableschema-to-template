@@ -7,11 +7,9 @@ setuptools.setup(
     name="tableschema-to-template",
     version="0.0.7",
     install_requires=[
-        # TODO: Not strict enough.
-        # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
-        'jsonschema',
-        'pyyaml',
-        'xlsxwriter'
+        'jsonschema>=1.0.0',
+        'pyyaml>=3.13',
+        'xlsxwriter>=1.2.8'
     ],
     scripts=[
         'tableschema_to_template/ts2xl.py'
