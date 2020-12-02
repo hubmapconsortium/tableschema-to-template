@@ -1,7 +1,7 @@
 language: python
 python:
   - '3.8'
-  - '3.4'
+  - '3.5' # Keep in sync with setup.py
 cache: pip
 env:
   - REQS=requirements.txt

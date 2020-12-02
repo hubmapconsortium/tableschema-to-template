@@ -7,7 +7,7 @@ setuptools.setup(
     name="tableschema-to-template",
     version="0.0.7",
     install_requires=[
-        # Keep this in sync with requirements-lower-bound.txt
+        # Keep in sync with requirements-lower-bound.txt:
         'jsonschema>=1.0.0',
         'pyyaml>=3.13',
         'xlsxwriter>=1.2.8'
@@ -31,7 +31,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    # TODO: May be too strict.
-    # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
-    python_requires='>=3.7',
+    # Keep in sync with .travis.yml:
+    python_requires='>=3.5',
+    # pyyaml is incompatible with older versions.
 )
