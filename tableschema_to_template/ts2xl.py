@@ -66,7 +66,10 @@ def main():
             f'{input_schema.name} is not a valid '
             f'Table Schema: {e.message}')
 
-    create_xlsx(table_schema, args.pop('output_xlsx'), **args)
+    output_xlsx = args.pop('output_xlsx')
+    create_xlsx(table_schema, output_xlsx, **args)
+
+    print(f'Created {output_xlsx}', file=sys.stderr)
     return 0
 
 
