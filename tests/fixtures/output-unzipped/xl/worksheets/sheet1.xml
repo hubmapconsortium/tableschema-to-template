@@ -1,51 +1,51 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-	<dimension ref="A1:F1"/>
-	<sheetViews>
-		<sheetView tabSelected="1" workbookViewId="0"/>
-	</sheetViews>
-	<sheetFormatPr defaultRowHeight="15"/>
-	<sheetData>
-		<row r="1" spans="1:6">
-			<c r="A1" s="1" t="s">
-				<v>0</v>
-			</c>
-			<c r="B1" s="1" t="s">
-				<v>4</v>
-			</c>
-			<c r="C1" s="1" t="s">
-				<v>8</v>
-			</c>
-			<c r="D1" s="1" t="s">
-				<v>9</v>
-			</c>
-			<c r="E1" s="1" t="s">
-				<v>10</v>
-			</c>
-			<c r="F1" s="1" t="s">
-				<v>11</v>
-			</c>
-		</row>
-	</sheetData>
-	<dataValidations count="5">
-		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="A2:A1048576">
-			<formula1>'abc list'!$A$1:$A$3</formula1>
-		</dataValidation>
-		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
-			<formula1>'xyz list'!$A$1:$A$3</formula1>
-		</dataValidation>
-		<dataValidation type="decimal" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="D2:D1048576">
-			<formula1>-1e+307</formula1>
-			<formula2>1e+307</formula2>
-		</dataValidation>
-		<dataValidation type="whole" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="E2:E1048576">
-			<formula1>-2147483647</formula1>
-			<formula2>2147483647</formula2>
-		</dataValidation>
-		<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="F2:F1048576">
-			<formula1>&quot;TRUE,FALSE&quot;</formula1>
-		</dataValidation>
-	</dataValidations>
-	<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>
-	<legacyDrawing r:id="rId1"/>
+  <dimension ref="A1:F1"/>
+  <sheetViews>
+    <sheetView tabSelected="1" workbookViewId="0"/>
+  </sheetViews>
+  <sheetFormatPr defaultRowHeight="15"/>
+  <sheetData>
+    <row r="1" spans="1:6">
+      <c r="A1" s="1" t="s">
+        <v>0</v>
+      </c>
+      <c r="B1" s="1" t="s">
+        <v>4</v>
+      </c>
+      <c r="C1" s="1" t="s">
+        <v>8</v>
+      </c>
+      <c r="D1" s="1" t="s">
+        <v>9</v>
+      </c>
+      <c r="E1" s="1" t="s">
+        <v>10</v>
+      </c>
+      <c r="F1" s="1" t="s">
+        <v>11</v>
+      </c>
+    </row>
+  </sheetData>
+  <dataValidations count="5">
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="A2:A1048576">
+      <formula1>'abc list'!$A$1:$A$3</formula1>
+    </dataValidation>
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
+      <formula1>'xyz list'!$A$1:$A$3</formula1>
+    </dataValidation>
+    <dataValidation type="decimal" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="D2:D1048576">
+      <formula1>-1e+307</formula1>
+      <formula2>1e+307</formula2>
+    </dataValidation>
+    <dataValidation type="whole" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="E2:E1048576">
+      <formula1>-2147483647</formula1>
+      <formula2>2147483647</formula2>
+    </dataValidation>
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="F2:F1048576">
+      <formula1>"TRUE,FALSE"</formula1>
+    </dataValidation>
+  </dataValidations>
+  <pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3"/>
+  <legacyDrawing r:id="rId1"/>
 </worksheet>

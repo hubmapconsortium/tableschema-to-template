@@ -1,0 +1,4 @@
+# Keep this in sync with setup.py.
+jsonschema==1.0.0
+pyyaml==3.13
+xlsxwriter==1.2.8

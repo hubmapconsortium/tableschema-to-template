@@ -5,13 +5,15 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.7",
+    version="0.0.9",
     install_requires=[
-        # TODO: Not strict enough.
-        # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
-        'jsonschema',
-        'pyyaml',
-        'xlsxwriter'
+        # Keep in sync with requirements-lower-bound.txt:
+        'jsonschema>=1.0.0',
+        'pyyaml>=3.13',
+        'xlsxwriter>=1.2.8'
+        # xlsxwriter bound could be loosened:
+        # Earlier versions generate slightly different XML, and tests fail here,
+        # but that's only because they are too fussy.
     ],
     scripts=[
         'tableschema_to_template/ts2xl.py'
@@ -29,7 +31,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    # TODO: May be too strict.
-    # https://github.com/hubmapconsortium/tableschema-to-template/issues/7
-    python_requires='>=3.7',
+    # Keep in sync with .travis.yml:
+    python_requires='>=3.6',
+    # f-strings aren't available in 3.5.
+    # pyyaml install fails on 3.4.
 )

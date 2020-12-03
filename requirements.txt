@@ -1,3 +1,4 @@
+# Periodically update these to the latest versions.
 jsonschema==3.2.0
 pyyaml==5.3.1
 xlsxwriter==1.3.7

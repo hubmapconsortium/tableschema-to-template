@@ -1,9 +1,12 @@
 language: python
 python:
   - '3.8'
+  - '3.6' # Keep in sync with setup.py
 cache: pip
-install:
-  - pip install -r requirements.txt
-  - pip install -r requirements-dev.txt
+env:
+  - REQS=requirements.txt
+  - REQS=requirements-lower-bound.txt
 script:
+  - pip install -r $REQS
+  - pip install -r requirements-dev.txt
   - ./test.sh
