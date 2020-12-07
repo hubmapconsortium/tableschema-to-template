@@ -23,6 +23,7 @@ def create_xlsx(
             'created': datetime(2000, 1, 1)
         })
     main_sheet = workbook.add_worksheet(sheet_name)
+    main_sheet.freeze_panes(1, 0)
 
     header_format = workbook.add_format({
         'bold': True,
