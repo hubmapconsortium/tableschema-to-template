@@ -1,5 +1,6 @@
 from pathlib import Path
 from zipfile import ZipFile
+import os
 
 from yattag import indent
 import pytest
@@ -37,19 +38,22 @@ def assert_matches_fixture(xlsx_path, zip_path):
 
     assert pretty_xml.strip() == \
         pretty_xml_fixture_path.read_text().strip(), \
-        'Update XML fixture?\n' + \
+        'For more details:\n' + \
+        f'  diff {pretty_xml_tmp_path} {pretty_xml_fixture_path}\n' + \
+        'To fix: update XML fixture?\n' + \
         f'  cp {pretty_xml_tmp_path} {pretty_xml_fixture_path}\n' + \
         'Or update Excel file?\n' + \
         f'  cp {xlsx_path} {Path(__file__).parent / "fixtures/template.xlsx"}'
 
 
+unzipped_dir = 'tests/fixtures/output-unzipped'
+
+
 @pytest.mark.parametrize(
     "zip_path",
-    # TODO: Scan the directory for fixtures, instead of listing here.
-    ['xl/worksheets/sheet1.xml',
-     'xl/sharedStrings.xml',
-     'xl/comments1.xml',
-     'docProps/core.xml']
+    [str((Path(base) / file).relative_to(unzipped_dir))
+     for (base, dirs, files) in os.walk(unzipped_dir)
+     for file in files]
 )
 def test_create_xlsx(xlsx_path, zip_path):
     assert_matches_fixture(xlsx_path, zip_path)
