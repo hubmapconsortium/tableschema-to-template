@@ -1,6 +1,6 @@
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from zipfile import ZipFile
+import os
 
 from yattag import indent
 import pytest
@@ -13,10 +13,10 @@ from create_xlsx import create_xlsx
 def xlsx_path():
     schema_path = Path(__file__).parent / 'fixtures/schema.yaml'
     schema = safe_load(schema_path.read_text())
-    with TemporaryDirectory() as temp_dir_name:
-        xlsx_path = Path(temp_dir_name) / 'template.xlsx'
-        create_xlsx(schema, xlsx_path)
-        yield xlsx_path
+    # Use /tmp rather than TemporaryDirectory so it can be inspected if tests fail.
+    xlsx_tmp_path = '/tmp/template.xlsx'
+    create_xlsx(schema, xlsx_tmp_path, idempotent=True)
+    yield xlsx_tmp_path
 
 
 def assert_matches_fixture(xlsx_path, zip_path):
@@ -38,16 +38,22 @@ def assert_matches_fixture(xlsx_path, zip_path):
 
     assert pretty_xml.strip() == \
         pretty_xml_fixture_path.read_text().strip(), \
-        'Update fixture?  ' + \
-        f'cp {pretty_xml_tmp_path} {pretty_xml_fixture_path}'
+        'For more details:\n' + \
+        f'  diff {pretty_xml_tmp_path} {pretty_xml_fixture_path}\n' + \
+        'To fix: update XML fixture?\n' + \
+        f'  cp {pretty_xml_tmp_path} {pretty_xml_fixture_path}\n' + \
+        'Or update Excel file?\n' + \
+        f'  cp {xlsx_path} {Path(__file__).parent / "fixtures/template.xlsx"}'
+
+
+unzipped_dir = 'tests/fixtures/output-unzipped'
 
 
 @pytest.mark.parametrize(
     "zip_path",
-    # TODO: Scan the directory for fixtures, instead of listing here.
-    ['xl/worksheets/sheet1.xml',
-     'xl/sharedStrings.xml',
-     'xl/comments1.xml']
+    [str((Path(base) / file).relative_to(unzipped_dir))
+     for (base, dirs, files) in os.walk(unzipped_dir)
+     for file in files]
 )
 def test_create_xlsx(xlsx_path, zip_path):
     assert_matches_fixture(xlsx_path, zip_path)

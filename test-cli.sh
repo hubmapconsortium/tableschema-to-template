@@ -16,24 +16,23 @@ function test_good_fixture() {
 
   PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
     tableschema_to_template/ts2xl.py \
-    tests/fixtures/schema.yaml $NEW_XLSX
+    tests/fixtures/schema.yaml $NEW_XLSX \
+    --sheet_name 'Enter data here' \
+    --idempotent
   unzip -q $NEW_XLSX -d $NEW_DIR
 
   cp tests/fixtures/template.xlsx $OLD_DIR
   unzip -q $OLD_DIR/template.xlsx -d $OLD_DIR
 
-  for UNZIPPED_PATH in 'xl/worksheets/sheet1.xml'; do
-    # The XML files in tests/fixtures/output-unzipped/ have been pretty-printed:
-    # They should not be directly compared against the command-line output.
-    # That is handled in the python test.
-    #
-    # Instead, here, we just unzip and do a byte-wise comparison of the original XML.
+  for UNZIPPED_PATH in `cd tests/fixtures/output-unzipped; find . | grep .xml`; do
+    # We look in output-unzipped only to get a list of files:
+    # Those have been pretty-printed, and should not be directly compared against the command-line output.
+    # Here, we just unzip and do a byte-wise comparison of the XML.
     cmp -s $NEW_DIR/$UNZIPPED_PATH \
           $OLD_DIR/$UNZIPPED_PATH \
-      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR).
-  Consider: cp $NEW_XLSX ./tests/fixtures/"
+      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider: cp $NEW_XLSX ./tests/fixtures/"
+    echo "Newly generated XSLX matches XLSX fixture on $UNZIPPED_PATH"
   done
-  echo "Newly generated XSLX matches fixture for $UNZIPPED_PATH"
   rm -rf $NEW_DIR
   rm -rf $OLD_DIR
 }
