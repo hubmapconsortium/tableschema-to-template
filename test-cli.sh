@@ -16,7 +16,9 @@ function test_good_fixture() {
 
   PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
     tableschema_to_template/ts2xl.py \
-    tests/fixtures/schema.yaml $NEW_XLSX
+    tests/fixtures/schema.yaml $NEW_XLSX \
+    --sheet_name 'Enter data here' \
+    --idempotent
   unzip -q $NEW_XLSX -d $NEW_DIR
 
   cp tests/fixtures/template.xlsx $OLD_DIR
@@ -29,7 +31,7 @@ function test_good_fixture() {
     cmp -s $NEW_DIR/$UNZIPPED_PATH \
           $OLD_DIR/$UNZIPPED_PATH \
       || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider: cp $NEW_XLSX ./tests/fixtures/"
-    echo "Newly generated XSLX matches fixture for $UNZIPPED_PATH"
+    echo "Newly generated XSLX matches XLSX fixture on $UNZIPPED_PATH"
   done
   rm -rf $NEW_DIR
   rm -rf $OLD_DIR

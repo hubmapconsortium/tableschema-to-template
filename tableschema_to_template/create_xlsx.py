@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from xlsxwriter import Workbook
 from xlsxwriter.utility import xl_col_to_name
 
@@ -13,9 +15,13 @@ def _col_below_header(i):
 def create_xlsx(
     table_schema, xlsx_path,
     sheet_name='Export this as TSV',
-    idempotent=True
+    idempotent=False
 ):
     workbook = Workbook(xlsx_path)
+    if idempotent:
+        workbook.set_properties({
+            'created': datetime(2000, 1, 1)
+        })
     main_sheet = workbook.add_worksheet(sheet_name)
 
     header_format = workbook.add_format({

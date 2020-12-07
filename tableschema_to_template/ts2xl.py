@@ -45,6 +45,11 @@ Optional CLI arguments correspond to optional kwarg arguements in Python.
         '--sheet_name',
         metavar='NAME',
         help='Name for the first sheet')
+    parser.add_argument(
+        '--idempotent',
+        action='store_true',
+        help='Each run with the same parameters will have the same output: '
+        '"2000-01-01" is filled in as the creation date.')
     return parser
 
 
