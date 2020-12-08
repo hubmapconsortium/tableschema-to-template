@@ -31,21 +31,21 @@
     </row>
   </sheetData>
   <dataValidations count="5">
-    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="A2:A1048576">
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="Value must come from list" error="Value must be one of: A / B / C." sqref="A2:A1048576">
       <formula1>'abc list'!$A$1:$A$3</formula1>
     </dataValidation>
-    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="Value must come from list" error="Value must be one of: X / Y / Z." sqref="B2:B1048576">
       <formula1>'xyz list'!$A$1:$A$3</formula1>
     </dataValidation>
-    <dataValidation type="decimal" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="D2:D1048576">
+    <dataValidation type="decimal" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="Not a number" error="The values in this column must be numbers." sqref="D2:D1048576">
       <formula1>-1e+307</formula1>
       <formula2>1e+307</formula2>
     </dataValidation>
-    <dataValidation type="whole" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="E2:E1048576">
+    <dataValidation type="whole" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="Not an integer" error="The values in this column must be integers." sqref="E2:E1048576">
       <formula1>-2147483647</formula1>
       <formula2>2147483647</formula2>
     </dataValidation>
-    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="F2:F1048576">
+    <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" errorTitle="Not a boolean" error="The values in this column must be &quot;TRUE&quot; or &quot;FALSE&quot;." sqref="F2:F1048576">
       <formula1>"TRUE,FALSE"</formula1>
     </dataValidation>
   </dataValidations>

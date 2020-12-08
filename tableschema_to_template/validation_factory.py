@@ -37,9 +37,9 @@ def _get_sheet_name(field_name):
 def _get_enum_error_message(enum, sheet_name):
     '''
     >>> _get_enum_error_message(['A', 'B', 'C'], 'fake list')
-    'asdf'
+    'Value must be one of: A / B / C.'
     >>> _get_enum_error_message(['A', 'B', 'C', 'D', 'E', 'F'], 'fake list')
-    'asdf'
+    'Value must come from fake list.'
     '''
     if len(enum) < 6:
         return f'Value must be one of: {" / ".join(enum)}.'
