@@ -30,7 +30,8 @@ function test_good_fixture() {
     # Here, we just unzip and do a byte-wise comparison of the XML.
     cmp -s $NEW_DIR/$UNZIPPED_PATH \
           $OLD_DIR/$UNZIPPED_PATH \
-      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider: cp $NEW_XLSX ./tests/fixtures/"
+      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider:
+  cp $NEW_XLSX ./tests/fixtures/"
     echo "Newly generated XSLX matches XLSX fixture on $UNZIPPED_PATH"
   done
   rm -rf $NEW_DIR

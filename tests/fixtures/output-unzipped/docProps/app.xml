@@ -17,7 +17,7 @@
     <vt:vector size="3" baseType="lpstr">
       <vt:lpstr>Export this as TSV</vt:lpstr>
       <vt:lpstr>abc list</vt:lpstr>
-      <vt:lpstr>xyz list</vt:lpstr>
+      <vt:lpstr>xyz (Fields wi...t names.) list</vt:lpstr>
     </vt:vector>
   </TitlesOfParts>
   <Company></Company>
