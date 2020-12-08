@@ -35,7 +35,7 @@
       <formula1>'abc list'!$A$1:$A$3</formula1>
     </dataValidation>
     <dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="B2:B1048576">
-      <formula1>'xyz (Fields wi...t names.) list'!$A$1:$A$3</formula1>
+      <formula1>'xyz list'!$A$1:$A$3</formula1>
     </dataValidation>
     <dataValidation type="decimal" allowBlank="1" showInputMessage="1" showErrorMessage="1" sqref="D2:D1048576">
       <formula1>-1e+307</formula1>

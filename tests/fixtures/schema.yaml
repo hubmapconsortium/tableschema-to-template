@@ -9,7 +9,7 @@ fields:
       - B
       - C
 -
-  name: xyz (Fields with enum constraints and names longer than 32 characters will have trucated sheet names.)
+  name: xyz
   description: End of the alphabet
   constraints:
     enum:
