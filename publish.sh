@@ -26,6 +26,7 @@ python3 -m twine upload \
   dist/*
 
 VERSION=`cat VERSION`
+git add .
 git commit -m "Version $VERSION"
 git tag $VERSION
 git push origin --tags
