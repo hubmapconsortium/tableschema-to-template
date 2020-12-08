@@ -1,0 +1,2 @@
+class ShowUsageException(Exception):
+    pass

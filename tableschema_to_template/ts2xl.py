@@ -5,14 +5,9 @@ import sys
 import os
 
 from yaml import safe_load
-from jsonschema import ValidationError
 
+from tableschema_to_template import ShowUsageException
 from tableschema_to_template.create_xlsx import create_xlsx
-from tableschema_to_template.validate_input import validate_input
-
-
-class ShowUsageException(Exception):
-    pass
 
 
 def _xlsx_path(s):
@@ -61,16 +56,8 @@ _parser = _make_parser()
 
 def main():
     args = vars(_parser.parse_args())
-
-    input_schema = args.pop('input_schema')
-    table_schema = safe_load(input_schema.read())
-    try:
-        validate_input(table_schema)
-    except ValidationError as e:
-        raise ShowUsageException(
-            f'{input_schema.name} is not a valid '
-            f'Table Schema: {e.message}')
-
+    input_schema_path = args.pop('input_schema')
+    table_schema = safe_load(input_schema_path.read())
     output_xlsx = args.pop('output_xlsx')
     create_xlsx(table_schema, output_xlsx, **args)
 

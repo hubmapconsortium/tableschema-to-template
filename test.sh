@@ -15,7 +15,7 @@ flake8 || die "Try: autopep8 --in-place --aggressive -r ."
 end flake8
 
 start pytest
-PYTHONPATH="${PYTHONPATH}:tableschema_to_template" pytest -vv --assert=plain
+PYTHONPATH="${PYTHONPATH}:tableschema_to_template" pytest -vv  --doctest-modules
 # "plain" means that instead of a diff, we see the full, untruncated assertion message.
 end pytest
 

@@ -4,6 +4,7 @@ from xlsxwriter import Workbook
 from xlsxwriter.utility import xl_col_to_name
 
 from tableschema_to_template.validation_factory import get_validation
+from tableschema_to_template.validate_input import validate_input
 
 
 def _col_below_header(i):
@@ -17,12 +18,14 @@ def create_xlsx(
     sheet_name='Export this as TSV',
     idempotent=False
 ):
+    validate_input(table_schema)
     workbook = Workbook(xlsx_path)
     if idempotent:
         workbook.set_properties({
             'created': datetime(2000, 1, 1)
         })
     main_sheet = workbook.add_worksheet(sheet_name)
+    main_sheet.freeze_panes(1, 0)
 
     header_format = workbook.add_format({
         'bold': True,

@@ -8,7 +8,7 @@ reset=`tput sgr0`
 
 die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
 
-function test_good_fixture() {
+function test_good() {
   # Make tempdir and cleanup afterwards.
   OLD_DIR=`mktemp -d`
   NEW_DIR=`mktemp -d`
@@ -30,11 +30,32 @@ function test_good_fixture() {
     # Here, we just unzip and do a byte-wise comparison of the XML.
     cmp -s $NEW_DIR/$UNZIPPED_PATH \
           $OLD_DIR/$UNZIPPED_PATH \
-      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider: cp $NEW_XLSX ./tests/fixtures/"
+      || die "On $UNZIPPED_PATH, CLI output ($NEW_DIR) output does not match fixture ($OLD_DIR). Consider:
+  cp $NEW_XLSX ./tests/fixtures/"
     echo "Newly generated XSLX matches XLSX fixture on $UNZIPPED_PATH"
   done
   rm -rf $NEW_DIR
   rm -rf $OLD_DIR
 }
 
-test_good_fixture
+function test_bad() {
+  ( ! PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
+    tableschema_to_template/ts2xl.py <(echo '{}') /tmp/should-not-exist.xlsx \
+    2>&1 ) \
+    | grep "Not a valid Table Schema: 'fields' is \(a \)\?required property" \
+    || die 'Did not see expected error'
+}
+
+function test_docs() {
+  PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help
+  TOOL=
+  diff \
+        <(perl -ne 'print if /usage:/../```/ and ! /```/' README-cli.md) \
+        <(PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help) \
+      || die 'Update README-cli.md'
+}
+
+for TEST in `declare -F | grep test | sed -e 's/declare -f //'`; do
+  echo "${green}${TEST}${reset}"
+  $TEST
+done
