@@ -11,7 +11,7 @@ die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
 cd `dirname $0`
 
 git diff --quiet || die 'Uncommitted changes: Stash or commit'
-git checkout master
+git checkout main
 git pull
 
 perl -i -pne 's/(\d+)$/$1+1/e' VERSION
