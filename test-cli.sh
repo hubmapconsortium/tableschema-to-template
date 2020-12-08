@@ -44,6 +44,7 @@ function test_bad() {
     2>&1 ) \
     | grep "Not a valid Table Schema: 'fields' is \(a \)\?required property" \
     || die 'Did not see expected error'
+    # The error message changed slightly between versions.
 }
 
 function test_docs() {
