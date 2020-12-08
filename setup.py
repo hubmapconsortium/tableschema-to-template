@@ -3,9 +3,12 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+with open("VERSION", "r") as fh:
+    version = fh.read()
+
 setuptools.setup(
     name="tableschema-to-template",
-    version="0.0.9",
+    version=version,
     install_requires=[
         # Keep in sync with requirements-lower-bound.txt:
         'jsonschema>=1.0.0',
