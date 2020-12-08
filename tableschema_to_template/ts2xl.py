@@ -5,13 +5,9 @@ import sys
 import os
 
 from yaml import safe_load
-from jsonschema import ValidationError
 
+from tableschema_to_template import ShowUsageException
 from tableschema_to_template.create_xlsx import create_xlsx
-
-
-class ShowUsageException(Exception):
-    pass
 
 
 def _xlsx_path(s):
@@ -63,12 +59,7 @@ def main():
     input_schema_path = args.pop('input_schema')
     table_schema = safe_load(input_schema_path.read())
     output_xlsx = args.pop('output_xlsx')
-    try:
-        create_xlsx(table_schema, output_xlsx, **args)
-    except ValidationError as e:
-        raise ShowUsageException(
-            f'{input_schema_path.name} is not a valid '
-            f'Table Schema: {e.message}')
+    create_xlsx(table_schema, output_xlsx, **args)
 
     print(f'Created {output_xlsx}', file=sys.stderr)
     return 0

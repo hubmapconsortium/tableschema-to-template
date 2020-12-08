@@ -42,7 +42,7 @@ function test_bad() {
   ( ! PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
     tableschema_to_template/ts2xl.py <(echo '{}') /tmp/should-not-exist.xlsx \
     2>&1 ) \
-    | grep "not a valid Table Schema: 'fields' is required property" \
+    | grep "Not a valid Table Schema: 'fields' is \(a \)\?required property" \
     || die 'Did not see expected error'
 }
 
