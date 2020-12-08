@@ -42,7 +42,6 @@ class EnumValidation(BaseValidation):
         for i, value in enumerate(enum):
             enum_sheet.write(i, 0, value)
 
-        enum = self.field['constraints']['enum']
         return {
             'validate': 'list',
             'source': f"='{name}'!$A$1:$A${len(enum)}"
