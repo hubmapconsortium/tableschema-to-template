@@ -30,3 +30,4 @@ git add .
 git commit -m "Version $VERSION"
 git tag $VERSION
 git push origin --tags
+git push origin
