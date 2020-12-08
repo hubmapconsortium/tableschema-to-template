@@ -2,6 +2,12 @@
 set -o errexit
 set -o pipefail
 
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
+
 cd `dirname $0`
 
 git diff --quiet || die 'Uncommitted changes: Stash or commit'
