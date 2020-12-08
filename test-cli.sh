@@ -9,7 +9,6 @@ reset=`tput sgr0`
 die() { set +v; echo "${red}$*${reset}" 1>&2 ; sleep 1; exit 1; }
 
 function test_good() {
-  echo "${green}test_good${reset}"
   # Make tempdir and cleanup afterwards.
   OLD_DIR=`mktemp -d`
   NEW_DIR=`mktemp -d`
@@ -40,7 +39,6 @@ function test_good() {
 }
 
 function test_bad() {
-  echo "${green}test_bad${reset}"
   ( ! PYTHONPATH="${PYTHONPATH}:tableschema_to_template" \
     tableschema_to_template/ts2xl.py <(echo '{}') /tmp/should-not-exist.xlsx \
     2>&1 ) \
@@ -48,5 +46,16 @@ function test_bad() {
     || die 'Did not see expected error'
 }
 
-test_good
-test_bad
+function test_docs() {
+  PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help
+  TOOL=
+  diff \
+        <(perl -ne 'print if /usage:/../```/ and ! /```/' README-cli.md) \
+        <(PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help) \
+      || die 'Update README-cli.md'
+}
+
+for TEST in `declare -F | grep test | sed -e 's/declare -f //'`; do
+  echo "${green}${TEST}${reset}"
+  $TEST
+done
