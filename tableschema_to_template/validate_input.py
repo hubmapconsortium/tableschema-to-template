@@ -3,6 +3,12 @@ from jsonschema import validate
 
 
 def validate_input(table_schema):
+    '''
+    >>> validate_input({})
+    Traceback (most recent call last):
+    ...
+    jsonschema.ValidationError: 'fields' is required property
+    '''
     table_schema_schema = safe_load(_table_schema_schema)
     validate(table_schema, table_schema_schema)
 
