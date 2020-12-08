@@ -27,7 +27,9 @@ schema = {'fields': [{
 create_xlsx(schema, '/tmp/template.xlsx')
 ```
 
-[Instructions for project developers here.](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
+Additional docs:
+- [For CLI users](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-cli.md#readme)
+- [For developers](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
 
 ## Features
 
