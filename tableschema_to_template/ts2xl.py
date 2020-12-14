@@ -6,15 +6,15 @@ import os
 
 from yaml import safe_load
 
-from tableschema_to_template import ShowUsageException
+from tableschema_to_template import Ts2xlException
 from tableschema_to_template.create_xlsx import create_xlsx
 
 
 def _xlsx_path(s):
     if os.path.exists(s):
-        raise ShowUsageException(f'"{s}" already exists')
+        raise Ts2xlException(f'"{s}" already exists')
     if not s.endswith('.xlsx'):
-        raise ShowUsageException(f'"{s}" does not end with ".xlsx"')
+        raise Ts2xlException(f'"{s}" does not end with ".xlsx"')
     return s
 
 
@@ -49,7 +49,7 @@ Optional CLI arguments correspond to optional kwarg arguements in Python.
 
 
 # We want the error handling inside the __name__ == '__main__' section
-# to be able to show the usage string if it catches a ShowUsageException.
+# to be able to show the usage string if it catches a Ts2xlException.
 # Defining this at the top level makes that possible.
 _parser = _make_parser()
 
@@ -68,7 +68,7 @@ def main():
 if __name__ == "__main__":
     try:
         exit_status = main()
-    except ShowUsageException as e:
+    except Ts2xlException as e:
         print(_parser.format_usage(), file=sys.stderr)
         print(e, file=sys.stderr)
         exit_status = 2

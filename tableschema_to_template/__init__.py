@@ -1,2 +1,2 @@
-class ShowUsageException(Exception):
+class Ts2xlException(Exception):
     pass

@@ -2,7 +2,7 @@ from yaml import safe_load
 from jsonschema import validate
 from jsonschema import ValidationError
 
-from tableschema_to_template import ShowUsageException
+from tableschema_to_template import Ts2xlException
 
 
 def validate_input(table_schema):
@@ -10,7 +10,7 @@ def validate_input(table_schema):
     >>> validate_input({})
     Traceback (most recent call last):
     ...
-    tableschema_to_template.ShowUsageException: Not a valid Table Schema: 'fields' ... required property
+    tableschema_to_template.Ts2xlException: Not a valid Table Schema: 'fields' ... required property
 
     (Phrasing of error message changed between versions.)
     '''
@@ -18,7 +18,7 @@ def validate_input(table_schema):
     try:
         validate(table_schema, table_schema_schema)
     except ValidationError as e:
-        raise ShowUsageException(f'Not a valid Table Schema: {e.message}')
+        raise Ts2xlException(f'Not a valid Table Schema: {e.message}')
 
 
 # This is ugly, but it's less configuration than including JSON in the build.
