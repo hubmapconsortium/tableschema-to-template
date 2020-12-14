@@ -47,13 +47,18 @@ function test_bad() {
     # The error message changed slightly between versions.
 }
 
-function test_docs() {
-  PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help
-  TOOL=
+function test_cli_doc() {
   diff \
         <(perl -ne 'print if /usage:/../```/ and ! /```/' README-cli.md) \
         <(PYTHONPATH="${PYTHONPATH}:tableschema_to_template" tableschema_to_template/ts2xl.py --help) \
       || die 'Update README-cli.md'
+}
+
+function test_py_doc() {
+  diff --ignore-all-space \
+        <(grep -v '```' README-py.md) \
+        <(pydoc tableschema_to_template.create_xlsx) \
+      || die 'Update README-py.md'
 }
 
 for TEST in `declare -F | grep test | sed -e 's/declare -f //'`; do

@@ -18,6 +18,21 @@ def create_xlsx(
     sheet_name='Export this as TSV',
     idempotent=False
 ):
+    '''
+    Creates Excel file with data validation from a Table Schema.
+
+    Args:
+        table_schema: Table Schema as dict.
+        xlsx_path: String path to Excel file to create. Must end with ".xlsx".
+        sheet_name: Optionally, specify the name of the data-entry sheet.
+        idempotent: If True, internal date-stamp is set to 2000-01-01, so re-runs are identical.
+
+    Returns:
+        No return value.
+
+    Raises:
+        tableschema_to_template.errors.Ts2xlException if table_schema is invalid.
+    '''
     validate_input(table_schema)
     workbook = Workbook(xlsx_path)
     if idempotent:

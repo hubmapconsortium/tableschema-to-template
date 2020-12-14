@@ -18,7 +18,7 @@ open template.xlsx
 
 Or to use inside Python:
 ```python
-from tableschema_to_template.create_xlsx import create_xlsx
+from tableschema_to_template import create_xlsx
 schema = {'fields': [{
   'name': 'a_number',
   'description': 'A number!',
@@ -29,7 +29,8 @@ create_xlsx(schema, '/tmp/template.xlsx')
 
 Additional docs:
 - [For CLI users](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-cli.md#readme)
-- [For developers](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
+- [For Python users](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-py.md#readme)
+- [For project developers](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
 
 ## Features
 
