@@ -6,7 +6,7 @@ import os
 
 from yaml import safe_load
 
-from tableschema_to_template import Ts2xlException
+from tableschema_to_template.errors import Ts2xlException
 from tableschema_to_template.create_xlsx import create_xlsx
 
 
