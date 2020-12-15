@@ -36,7 +36,7 @@ Additional docs:
 
 - Enum constraints transformed into pull-downs.
 - Field descriptions transformed into comments in header.
-- Float, integer, and boolean type validation.
+- Float, integer, and boolean type validation, with range checks on numbers.
 
 More details in the [changelog](CHANGELOG.md).
 

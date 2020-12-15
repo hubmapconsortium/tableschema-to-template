@@ -28,10 +28,10 @@ def _get_sheet_name(field_name):
     >>> _get_sheet_name('longer than thirty-one characters')
     'longer than th...haracters list'
     '''
-    sheet_name = f'{field_name} list'
+    sheet_name = f"{field_name} list"
     if len(sheet_name) <= 31:
         return sheet_name
-    return f'{sheet_name[:14]}...{sheet_name[-14:]}'
+    return f"{sheet_name[:14]}...{sheet_name[-14:]}"
 
 
 def _get_enum_error_message(enum, sheet_name):
@@ -42,8 +42,8 @@ def _get_enum_error_message(enum, sheet_name):
     'Value must come from fake list.'
     '''
     if len(enum) < 6:
-        return f'Value must be one of: {" / ".join(enum)}.'
-    return f'Value must come from {sheet_name}.'
+        return f"Value must be one of: {' / '.join(enum)}."
+    return f"Value must come from {sheet_name}."
 
 
 class EnumValidation(BaseValidation):
@@ -70,13 +70,26 @@ class NumberValidation(BaseValidation):
             return self.field['constraints'][bound_name]
         return default
 
+    def get_bound_message(self):
+        if 'constraints' not in self.field:
+            return ''
+        cons = self.field['constraints']
+        if 'minimum' in cons and 'maximum' in cons:
+            return f" between {cons['minimum']} and {cons['maximum']}"
+        if 'minimum' in cons:
+            return f" >= {cons['minimum']}"
+        if 'maximum' in cons:
+            return f" <= {cons['maximum']}"
+        return ''
+
 
 class FloatValidation(NumberValidation):
     def get_data_validation(self):
         return {
             'validate': 'decimal',
             'error_title': 'Not a number',
-            'error_message': 'The values in this column must be numbers.',
+            'error_message':
+                f"The values in this column must be numbers{self.get_bound_message()}.",
             'criteria': 'between',
             'minimum': self.get_min(),
             'maximum': self.get_max()
@@ -95,7 +108,8 @@ class IntegerValidation(NumberValidation):
         return {
             'validate': 'integer',
             'error_title': 'Not an integer',
-            'error_message': 'The values in this column must be integers.',
+            'error_message':
+                f"The values in this column must be integers{self.get_bound_message()}.",
             'criteria': 'between',
             'minimum': self.get_min(),
             'maximum': self.get_max()
