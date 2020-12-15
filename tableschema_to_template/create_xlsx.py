@@ -4,7 +4,7 @@ from xlsxwriter import Workbook
 from xlsxwriter.utility import xl_col_to_name
 
 from tableschema_to_template.validation_factory import get_validation
-from tableschema_to_template.validate_input import validate_input
+from tableschema_to_template.validate_schema import validate_schema
 
 
 def _col_below_header(i):
@@ -18,7 +18,22 @@ def create_xlsx(
     sheet_name='Export this as TSV',
     idempotent=False
 ):
-    validate_input(table_schema)
+    '''
+    Creates Excel file with data validation from a Table Schema.
+
+    Args:
+        table_schema: Table Schema as dict.
+        xlsx_path: Path of Excel file to create. Must end with ".xlsx".
+        sheet_name: Optionally, specify the name of the data-entry sheet.
+        idempotent: If set, internal date-stamp is set to 2000-01-01, so re-runs are identical.
+
+    Returns:
+        No return value.
+
+    Raises:
+        tableschema_to_template.errors.Ts2xlException if table_schema is invalid.
+    '''
+    validate_schema(table_schema)
     workbook = Workbook(xlsx_path)
     if idempotent:
         workbook.set_properties({

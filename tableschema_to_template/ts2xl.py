@@ -3,18 +3,19 @@
 import argparse
 import sys
 import os
+import re
 
 from yaml import safe_load
 
-from tableschema_to_template import ShowUsageException
-from tableschema_to_template.create_xlsx import create_xlsx
+from tableschema_to_template.errors import Ts2xlException
+from tableschema_to_template import create_xlsx
 
 
 def _xlsx_path(s):
     if os.path.exists(s):
-        raise ShowUsageException(f'"{s}" already exists')
+        raise Ts2xlException(f'"{s}" already exists')
     if not s.endswith('.xlsx'):
-        raise ShowUsageException(f'"{s}" does not end with ".xlsx"')
+        raise Ts2xlException(f'"{s}" does not end with ".xlsx"')
     return s
 
 
@@ -23,52 +24,67 @@ def _make_parser():
         description='''
 Given a Frictionless Table Schema,
 generates an Excel template with input validation.
-''',
-        epilog='''
-Optional CLI arguments correspond to optional kwarg arguements in Python.
-'''
-    )
+''')
+    doc_dict = _doc_to_dict(create_xlsx.__doc__)
     parser.add_argument(
-        'input_schema', type=argparse.FileType('r'),
+        'schema_path', type=argparse.FileType('r'),
         metavar='SCHEMA',
-        help='JSON or YAML Table Schema to read')
+        help='Path of JSON or YAML Table Schema.')
     parser.add_argument(
-        'output_xlsx', type=_xlsx_path,
+        'xlsx_path', type=_xlsx_path,
         metavar='EXCEL',
-        help='Excel (.xlsx) file to create')
+        help=doc_dict['xlsx_path'])
     parser.add_argument(
         '--sheet_name',
         metavar='NAME',
-        help='Name for the first sheet')
+        help=doc_dict['sheet_name'])
     parser.add_argument(
         '--idempotent',
         action='store_true',
-        help='Each run with the same parameters will have the same output: '
-        '"2000-01-01" is filled in as the creation date.')
+        help=doc_dict['idempotent'])
     return parser
 
 
+def _doc_to_dict(doc):
+    '''
+    Given google style docs, parse out the arguments,
+    and return a dict.
+
+    >>> _doc_to_dict('... Args: fake_arg: It works! Returns: ...')
+    {'fake_arg': 'It works!'}
+    '''
+    arg_lines = re.search(
+        r'(?<=Args:)(.+)(?=Returns:)', doc,
+        flags=re.DOTALL
+    ).group(0).strip().split('\n')
+    arg_matches = [
+        re.match(r'^\s*(\w+):\s+(\S.*)', arg.strip())
+        for arg in arg_lines
+    ]
+    return {m.group(1): m.group(2) for m in arg_matches}
+
+
 # We want the error handling inside the __name__ == '__main__' section
-# to be able to show the usage string if it catches a ShowUsageException.
+# to be able to show the usage string if it catches a Ts2xlException.
 # Defining this at the top level makes that possible.
 _parser = _make_parser()
 
 
 def main():
     args = vars(_parser.parse_args())
-    input_schema_path = args.pop('input_schema')
-    table_schema = safe_load(input_schema_path.read())
-    output_xlsx = args.pop('output_xlsx')
-    create_xlsx(table_schema, output_xlsx, **args)
+    schema_path = args.pop('schema_path')
+    table_schema = safe_load(schema_path.read())
+    xlsx_path = args.pop('xlsx_path')
+    create_xlsx(table_schema, xlsx_path, **args)
 
-    print(f'Created {output_xlsx}', file=sys.stderr)
+    print(f'Created {xlsx_path}', file=sys.stderr)
     return 0
 
 
 if __name__ == "__main__":
     try:
         exit_status = main()
-    except ShowUsageException as e:
+    except Ts2xlException as e:
         print(_parser.format_usage(), file=sys.stderr)
         print(e, file=sys.stderr)
         exit_status = 2

@@ -22,3 +22,10 @@ end pytest
 start cli
 ./test-cli.sh || die 'test-cli.sh failed'
 end cli
+
+start changelog
+if [ "$TRAVIS_BRANCH" != 'main' ]; then
+  diff CHANGELOG.md <(curl -s https://raw.githubusercontent.com/hubmapconsortium/tableschema-to-template/main/CHANGELOG.md) \
+    && die 'Update CHANGELOG.md'
+fi
+end changelog

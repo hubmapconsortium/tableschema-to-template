@@ -18,7 +18,7 @@ open template.xlsx
 
 Or to use inside Python:
 ```python
-from tableschema_to_template.create_xlsx import create_xlsx
+from tableschema_to_template import create_xlsx
 schema = {'fields': [{
   'name': 'a_number',
   'description': 'A number!',
@@ -29,21 +29,26 @@ create_xlsx(schema, '/tmp/template.xlsx')
 
 Additional docs:
 - [For CLI users](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-cli.md#readme)
-- [For developers](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
+- [For Python users](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-py.md#readme)
+- [For project developers](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/README-dev.md#readme)
 
 ## Features
 
 - Enum constraints transformed into pull-downs.
 - Field descriptions transformed into comments in header.
-- Float, integer, and boolean type validation.
+- Float, integer, and boolean type validation, with range checks on numbers.
+
+More details in the [changelog](CHANGELOG.md).
 
 ## Related work
 
-From the Frictionless community:
+If you want to construct Excel files programmatically, [XlsxWriter](https://xlsxwriter.readthedocs.io/) is great!
+
+For validated data entry, from the Frictionless community:
 - [`table-schema-resource-template`](https://pypi.org/project/table-schema-resource-template/): Generates templates, but doesn't go beyond row headers. 
 - [`data-curator`](https://github.com/qcif/data-curator): Desktop application for data entry based on Table Schema.
 - [`csv-gg`](https://github.com/etalab/csv-gg): Web app which serves data entry form, and uses [Validata API](https://git.opendatafrance.net/validata/) for validation. 
 
-For the biomedical ontologies community:
+From the biomedical ontologies community:
 - [`CEDAR`](https://more.metadatacenter.org/): Data entry tool based on ontologies.
 - [`Webulous`](https://www.ebi.ac.uk/spot/webulous/): Google sheets plugin that adds pulldowns based on ontology terms.

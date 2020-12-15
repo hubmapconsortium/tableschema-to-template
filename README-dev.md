@@ -16,7 +16,5 @@ pip install -r requirements-dev.txt
 ./test.sh
 ```
 
-To build and publish,
-- If you haven't already, generate a token on Pypi and create a `.pypirc` in your checkout.
-- Increment the version number in setup.py.
-- Finally: `./publish.sh`
+To build and publish, make sure you have a `.pypirc` with a token,
+and then run `./publish.sh`.
