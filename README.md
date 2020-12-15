@@ -38,6 +38,8 @@ Additional docs:
 - Field descriptions transformed into comments in header.
 - Float, integer, and boolean type validation.
 
+More details in the [changelog](CHANGELOG.md).
+
 ## Related work
 
 If you want to construct Excel files programmatically, [XlsxWriter](https://xlsxwriter.readthedocs.io/) is great!
