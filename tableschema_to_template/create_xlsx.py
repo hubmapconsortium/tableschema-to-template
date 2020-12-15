@@ -23,9 +23,9 @@ def create_xlsx(
 
     Args:
         table_schema: Table Schema as dict.
-        xlsx_path: String path to Excel file to create. Must end with ".xlsx".
+        xlsx_path: Path of Excel file to create. Must end with ".xlsx".
         sheet_name: Optionally, specify the name of the data-entry sheet.
-        idempotent: If True, internal date-stamp is set to 2000-01-01, so re-runs are identical.
+        idempotent: If set, internal date-stamp is set to 2000-01-01, so re-runs are identical.
 
     Returns:
         No return value.

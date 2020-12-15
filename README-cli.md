@@ -5,14 +5,12 @@ Given a Frictionless Table Schema, generates an Excel template with input
 validation.
 
 positional arguments:
-  SCHEMA             JSON or YAML Table Schema to read
-  EXCEL              Excel (.xlsx) file to create
+  SCHEMA             Path of JSON or YAML Table Schema.
+  EXCEL              Path of Excel file to create. Must end with ".xlsx".
 
 optional arguments:
   -h, --help         show this help message and exit
-  --sheet_name NAME  Name for the first sheet
-  --idempotent       Each run with the same parameters will have the same
-                     output: "2000-01-01" is filled in as the creation date.
-
-Optional CLI arguments correspond to optional kwarg arguements in Python.
+  --sheet_name NAME  Optionally, specify the name of the data-entry sheet.
+  --idempotent       If set, internal date-stamp is set to 2000-01-01, so re-
+                     runs are identical.
 ```

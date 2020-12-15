@@ -40,11 +40,13 @@ Additional docs:
 
 ## Related work
 
-From the Frictionless community:
+If you want to construct Excel files programmatically, [XlsxWriter](https://xlsxwriter.readthedocs.io/) is great!
+
+For validated data entry, from the Frictionless community:
 - [`table-schema-resource-template`](https://pypi.org/project/table-schema-resource-template/): Generates templates, but doesn't go beyond row headers. 
 - [`data-curator`](https://github.com/qcif/data-curator): Desktop application for data entry based on Table Schema.
 - [`csv-gg`](https://github.com/etalab/csv-gg): Web app which serves data entry form, and uses [Validata API](https://git.opendatafrance.net/validata/) for validation. 
 
-For the biomedical ontologies community:
+From the biomedical ontologies community:
 - [`CEDAR`](https://more.metadatacenter.org/): Data entry tool based on ontologies.
 - [`Webulous`](https://www.ebi.ac.uk/spot/webulous/): Google sheets plugin that adds pulldowns based on ontology terms.
