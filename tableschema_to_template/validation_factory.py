@@ -65,47 +65,47 @@ class EnumValidation(BaseValidation):
 
 
 class NumberValidation(BaseValidation):
-    def get_criteria(self):
+    def get_bound(self, bound_name, default):
+        if 'constraints' in self.field and bound_name in self.field['constraints']:
+            return self.field['constraints'][bound_name]
+        return default
+
+
+class FloatValidation(NumberValidation):
+    def get_data_validation(self):
         return {
+            'validate': 'decimal',
+            'error_title': 'Not a number',
+            'error_message': 'The values in this column must be numbers.',
             'criteria': 'between',
             'minimum': self.get_min(),
             'maximum': self.get_max()
         }
 
-
-class FloatValidation(NumberValidation):
-    def get_data_validation(self):
-        to_return = {
-            'validate': 'decimal',
-            'error_title': 'Not a number',
-            'error_message': 'The values in this column must be numbers.'
-        }
-        to_return.update(self.get_criteria())
-        return to_return
-
     def get_min(self):
         # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
-        return -1e+307
+        return self.get_bound('minimum', -1e+307)
 
     def get_max(self):
-        return 1e+307
+        return self.get_bound('maximum', 1e+307)
 
 
 class IntegerValidation(NumberValidation):
     def get_data_validation(self):
-        to_return = {
+        return {
             'validate': 'integer',
             'error_title': 'Not an integer',
-            'error_message': 'The values in this column must be integers.'
+            'error_message': 'The values in this column must be integers.',
+            'criteria': 'between',
+            'minimum': self.get_min(),
+            'maximum': self.get_max()
         }
-        to_return.update(self.get_criteria())
-        return to_return
 
     def get_min(self):
-        return -2147483647
+        return self.get_bound('minimum', -2147483647)
 
     def get_max(self):
-        return 2147483647
+        return self.get_bound('maximum', 2147483647)
 
 
 class BooleanValidation(BaseValidation):
