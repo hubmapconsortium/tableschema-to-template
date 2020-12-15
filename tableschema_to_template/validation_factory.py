@@ -66,26 +66,38 @@ class EnumValidation(BaseValidation):
 
 class NumberValidation(BaseValidation):
     def get_data_validation(self):
-        return {
+        to_return = {
             'validate': 'decimal',
+            'error_title': 'Not a number',
+            'error_message': 'The values in this column must be numbers.'
+        }
+        to_return.update(self.get_criteria())
+        return to_return
+
+    def get_criteria(self):
+        return {
             # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
             'criteria': 'between',
             'minimum': -1e+307,
-            'maximum': 1e+307,
-            'error_title': 'Not a number',
-            'error_message': 'The values in this column must be numbers.'
+            'maximum': 1e+307
         }
 
 
 class IntegerValidation(BaseValidation):
     def get_data_validation(self):
-        return {
+        to_return = {
             'validate': 'integer',
-            'criteria': 'between',
-            'minimum': -2147483647,
-            'maximum': 2147483647,
             'error_title': 'Not an integer',
             'error_message': 'The values in this column must be integers.'
+        }
+        to_return.update(self.get_criteria())
+        return to_return
+
+    def get_criteria(self):
+        return {
+            'criteria': 'between',
+            'minimum': -2147483647,
+            'maximum': 2147483647
         }
 
 
