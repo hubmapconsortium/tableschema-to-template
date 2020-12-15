@@ -2,7 +2,7 @@ def get_validation(field, workbook):
     if 'constraints' in field and 'enum' in field['constraints']:
         return EnumValidation(field, workbook)
     if 'type' in field and field['type'] == 'number':
-        return NumberValidation(field, workbook)
+        return FloatValidation(field, workbook)
     if 'type' in field and field['type'] == 'integer':
         return IntegerValidation(field, workbook)
     if 'type' in field and field['type'] == 'boolean':
@@ -65,6 +65,15 @@ class EnumValidation(BaseValidation):
 
 
 class NumberValidation(BaseValidation):
+    def get_criteria(self):
+        return {
+            'criteria': 'between',
+            'minimum': self.get_min(),
+            'maximum': self.get_max()
+        }
+
+
+class FloatValidation(NumberValidation):
     def get_data_validation(self):
         to_return = {
             'validate': 'decimal',
@@ -74,16 +83,15 @@ class NumberValidation(BaseValidation):
         to_return.update(self.get_criteria())
         return to_return
 
-    def get_criteria(self):
-        return {
-            # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
-            'criteria': 'between',
-            'minimum': -1e+307,
-            'maximum': 1e+307
-        }
+    def get_min(self):
+        # https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3
+        return -1e+307
+
+    def get_max(self):
+        return 1e+307
 
 
-class IntegerValidation(BaseValidation):
+class IntegerValidation(NumberValidation):
     def get_data_validation(self):
         to_return = {
             'validate': 'integer',
@@ -93,12 +101,11 @@ class IntegerValidation(BaseValidation):
         to_return.update(self.get_criteria())
         return to_return
 
-    def get_criteria(self):
-        return {
-            'criteria': 'between',
-            'minimum': -2147483647,
-            'maximum': 2147483647
-        }
+    def get_min(self):
+        return -2147483647
+
+    def get_max(self):
+        return 2147483647
 
 
 class BooleanValidation(BaseValidation):
