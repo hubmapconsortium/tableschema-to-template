@@ -55,9 +55,10 @@ function test_cli_doc() {
 }
 
 function test_py_doc() {
+  # Plain 'pydoc' ran wrong version on Travis.
   diff --ignore-all-space \
         <(grep -v '```' README-py.md) \
-        <(pydoc tableschema_to_template.create_xlsx) \
+        <(python -m pydoc tableschema_to_template.create_xlsx) \
       || die 'Update README-py.md'
 }
 
