@@ -4,7 +4,7 @@ from xlsxwriter import Workbook
 from xlsxwriter.utility import xl_col_to_name
 
 from tableschema_to_template.validation_factory import get_validation
-from tableschema_to_template.validate_input import validate_input
+from tableschema_to_template.validate_schema import validate_schema
 
 
 def _col_below_header(i):
@@ -33,7 +33,7 @@ def create_xlsx(
     Raises:
         tableschema_to_template.errors.Ts2xlException if table_schema is invalid.
     '''
-    validate_input(table_schema)
+    validate_schema(table_schema)
     workbook = Workbook(xlsx_path)
     if idempotent:
         workbook.set_properties({

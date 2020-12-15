@@ -5,9 +5,9 @@ from jsonschema import ValidationError
 from tableschema_to_template.errors import Ts2xlException
 
 
-def validate_input(table_schema):
+def validate_schema(table_schema):
     '''
-    >>> validate_input({})
+    >>> validate_schema({})
     Traceback (most recent call last):
     ...
     tableschema_to_template.errors.Ts2xlException: Not a valid Table Schema: 'fields' ... required property

@@ -52,7 +52,7 @@
             <rFont val="Tahoma"/>
             <family val="2"/>
           </rPr>
-          <t>Any number</t>
+          <t>Any number &gt;= zero</t>
         </r>
       </text>
     </comment>
@@ -65,7 +65,7 @@
             <rFont val="Tahoma"/>
             <family val="2"/>
           </rPr>
-          <t>Any integer</t>
+          <t>An integer between 1 and 10</t>
         </r>
       </text>
     </comment>
