@@ -38,7 +38,7 @@ Additional docs:
 - Field descriptions transformed into comments in header.
 - Float, integer, and boolean type validation, with range checks on numbers.
 
-More details in the [changelog](CHANGELOG.md).
+More details in the [changelog](https://github.com/hubmapconsortium/tableschema-to-template/blob/main/CHANGELOG.md#readme).
 
 ## Related work
 
