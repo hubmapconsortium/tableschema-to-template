@@ -1,4 +1,5 @@
 0.0.13 - in progress
+- Add license files to sdist.
 
 0.0.12 - 2020-12-15
 - Check for changelog updates with each PR.
