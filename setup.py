@@ -27,6 +27,7 @@ setuptools.setup(
     "generates an Excel template with input validation",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    license_files=['LICENSE'],
     url="https://github.com/hubmapconsortium/tableschema-to-template",
     packages=setuptools.find_packages(),
     classifiers=[
