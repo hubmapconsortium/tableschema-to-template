@@ -19,7 +19,7 @@ perl -i -pne 's/(\d+)$/$1+1/e' VERSION
 rm -rf build/
 rm -rf dist/
 
-python3 setup.py sdist bdist_wheel
+python3 -m build
 python3 -m twine upload \
   --config-file .pypirc \
   --non-interactive \

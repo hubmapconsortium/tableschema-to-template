@@ -1,0 +1,6 @@
+exclude .gitignore
+exclude .travis.yml
+exclude publish.sh
+exclude test-cli.sh
+exclude test.sh
+prune tests
