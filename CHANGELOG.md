@@ -1,4 +1,5 @@
-0.0.13 - in progress
+0.0.13 - 2023-02-01
+- Update publish.sh to include license and prune unneeded files in sdist.
 
 0.0.12 - 2020-12-15
 - Check for changelog updates with each PR.
