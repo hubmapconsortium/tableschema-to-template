@@ -1,6 +1,8 @@
+include VERSION
 exclude .gitignore
 exclude .travis.yml
 exclude publish.sh
 exclude test-cli.sh
 exclude test.sh
+exclude .pypirc
 prune tests
